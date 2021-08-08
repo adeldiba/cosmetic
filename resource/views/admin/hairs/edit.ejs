@@ -1,0 +1,200 @@
+<div class="row">
+    <div class="col-sm-12 col-md-10">
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+            <h2>ویرایش محصولات مو</h2>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-2">
+        <div class="text-left">
+            <a href="/admin/hairs" type="submit" class="btn btn-info">بازگشت</a>
+        </div>
+    </div>
+</div><!--row-->
+
+<form class="form-horizontal" action="/admin/hairs/<%= hair._id %>?_method=put" method="post" enctype="multipart/form-data">
+
+    <%- include(viewPath('layouts/error-messages')) -%>
+    <div class="form-group row">
+        <div class="col">
+            <label for="title" class="control-label font-weight-bold">عنوان محصول</label>
+            <input type="text" class="form-control" name="title" value="<%= hair.title %>" id="title" placeholder="عنوان را وارد کنید">
+        </div>
+        <div class="col">
+            <label for="model" class="control-label font-weight-bold">شناسه محصول</label>
+            <input type="text" class="form-control" name="productID" value="<%= hair.productID %>" id="productID" placeholder="شناسه محصول را وارد کنید">
+        </div>
+        <div class="col">
+            <label for="model" class="control-label font-weight-bold">مدل محصول</label>
+            <input type="text" class="form-control" name="model" value="<%= hair.model %>" id="model" placeholder="مدل محصول را وارد کنید">
+        </div>
+    </div>
+    
+        <div class="form-group row">
+            <div class="col">
+                <label for="countries" class="control-label font-weight-bold">کشور سازنده</label>
+                <select name="countries" id="countries" class="form-control">
+                    <% countries.forEach(count => { %>
+                        <option value="<%= count.id %>" <%= hair.countries.indexOf(count.id) !== -1 ? 'selected' : ''%> ><%= count.name %></option>
+                    <% }); %> 
+                </select>
+            </div>
+            <div class="col">
+                <label for="performances" class="control-label font-weight-bold">کارایی محصول</label>
+                <select name="performances" id="performances" class="form-control">
+                    <% performances.forEach(perf => { %>
+                        <option value="<%= perf.id %>" <%= hair.performances.indexOf(perf.id) !== -1 ? 'selected' : ''%>><%= perf.name %></option>
+                    <% }); %> 
+                </select>
+            </div>
+            <div class="col">
+                <label for="type" class="control-label font-weight-bold font-weight-bold">فیلتر گذاری</label>
+                <select name="type" id="type" class="form-control">
+                    <option value="bestsellers" <%= hair.type === 'bestsellers' ? 'selected' : '' %> >پرفروش ترین</option>
+                    <option value="new" <%= hair.type === 'new' ? 'selected' : '' %> >جدید ترین</option>
+                    <option value="popular" <%= hair.type === 'popular' ? 'selected' : '' %>>محبوب ترین</option>
+                    
+                </select>
+            </div>
+    </div>
+
+    <div class="form-group row"> 
+        <div class="col">
+            <label for="categories_hair" class="control-label font-weight-bold font-weight-bold">دسته بندی</label>
+            <select name="categories_hair" id="categories_hair" class="form-control form-control-chosen" data-placeholder="دسته بندی مورد نظر ..." multiple>
+                <% categories_hair.forEach(cat_hair => { %>
+                    <option value="<%= cat_hair.id %>" <%= hair.categories_hair.indexOf(cat_hair.id) !== -1 ? 'selected' : ''%>><%= cat_hair.name %></option>
+                <% }); %>   
+            </select>
+        </div>
+        <div class="col">
+            <label for="genders" class="control-label font-weight-bold">جنسیت</label>
+            <select name="genders" id="genders" class="form-control form-control-chosen" multiple>
+                <% genders.forEach(gen => { %>
+                    <option value="<%= gen.id %>" <%= hair.genders.indexOf(gen.id) !== -1 ? 'selected' : ''%> ><%= gen.name %></option>
+                <% }); %> 
+            </select>
+        </div>
+    </div>
+    
+    
+    <div class="form-group row">
+      <div class="col">
+          <label for="body" class="control-label font-weight-bold">کاربرد محصول</label>
+          <textarea rows="5" class="form-control" name="body" id="body" placeholder="متن مقاله را وارد کنید">
+            <%= hair.body %>
+          </textarea>
+      </div>
+      <div class="col">
+        <label for="body2" class="control-label font-weight-bold">نوع ماشین</label>
+        <textarea rows="5" class="form-control" name="body2" id="body2" placeholder="متن مقاله را وارد کنید">
+          <%= hair.body2 %>
+        </textarea>
+    </div>
+    </div>
+    <div class="form-group">
+        
+        <p>
+           <% if(hair.file == '') { %>
+            <img id="no-image" src="/images/no-image.png" alt=""> 
+           <% } else { %>
+            <img id="no-image" src="/uploads/<%= hair.file %>" alt=""> 
+           <% } %> 
+        </p>
+    </div>
+    <div class="form-group row">
+            
+        <div class="col">
+            <div class="button_outer">
+                <div class="btn_upload">
+                    <input type="file" id="upload_file" name="file">
+                    آپلود تصویر
+                </div>
+                <div class="processing_bar"></div>
+                <div class="success_box"></div>
+            </div>
+            <div class="error_msg"></div>
+    <div class="uploaded_file_view" id="uploaded_view">
+        <span class="file_remove">X</span>
+    </div>
+        </div>
+    </div>
+    <p class="text-danger">در صورتی که محصول شما تخفیف دارد این دو فیلد را پر کنید، اگر محصول شما تخفیف ندارد این دو فیلد را پر نکنید.</p>
+    <div class="form-group row">
+        
+        <div class="col">
+            <label for="notprice" class="control-label font-weight-bold">قیمت تخفیف</label>
+            <input type="text" onkeyup="javascript:this.value=separate(this.value)" class="form-control" name="notprice" value="<%= hair.notprice %>" id="notprice" placeholder="قیمت ها را وارد کنید" value="">
+        </div>
+        <div class="col">
+            <label for="discount" class="control-label font-weight-bold font-weight-bold">درصد تخفیف</label> 
+            <input type="text" class="form-control" name="discount" value="<%= hair.discount %>" id="discount" placeholder="درصد تخفیف را وارد کنید" value="">
+        </div>
+        
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="price" class="control-label font-weight-bold">قیمت</label>
+            <input type="text" onkeyup="javascript:this.value=separate(this.value)" class="form-control" name="price" value="<%= hair.price %>"  id="price" placeholder="قیمت ها را وارد کنید" value="">
+        </div>
+        <div class="col">
+            <label for="typetwo" class="control-label font-weight-bold font-weight-bold">فیلتر گذاری</label>
+            <select name="typetwo" id="typetwo" class="form-control">
+                <option value="available" <%= hair.typetwo === 'available' ? 'selected' : '' %> >موجود</option>
+                <option value="notavailable" <%= hair.typetwo === 'notavailable' ? 'selected' : '' %> >موجود نیست</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="key" class="control-label font-weight-bold">کلمات کلیدی</label>
+            <input type="text" class="form-control" name="key" id="key" placeholder="تگ ها را وارد کنید" value="<%= hair.key %>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <button type="submit" class="btn btn-danger">ارسال</button>
+        </div>
+       
+    </div>
+</form>
+
+
+<link rel="stylesheet" href="/css/component-chosen.min.css">
+<script src="/ckeditor/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+<script>
+    var btnUpload = $("#upload_file"),
+		btnOuter = $(".button_outer");
+	btnUpload.on("change", function(e){
+		var ext = btnUpload.val().split('.').pop().toLowerCase();
+		if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+			$(".error_msg").text("Not an Image...");
+		} else {
+			$(".error_msg").text("");
+			btnOuter.addClass("file_uploading");
+			setTimeout(function(){
+				btnOuter.addClass("file_uploaded");
+			},3000);
+			var uploadedFile = URL.createObjectURL(e.target.files[0]);
+			setTimeout(function(){
+				$("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
+			},3500);
+		}
+	});
+	$(".file_remove").on("click", function(e){
+		$("#uploaded_view").removeClass("show");
+		$("#uploaded_view").find("img").remove();
+		btnOuter.removeClass("file_uploading");
+		btnOuter.removeClass("file_uploaded");
+	});
+</script>
+<script>
+$('.form-control-chosen').chosen({});    
+</script>
+<script>
+    CKEDITOR.replace('body' , {
+         filebrowserUploadUrl : '/admin/upload-image'
+     });
+     CKEDITOR.replace('body2' , {
+         filebrowserUploadUrl : '/admin/upload-image'
+     });
+     
+</script>

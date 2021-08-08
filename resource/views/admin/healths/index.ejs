@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>محصولات بهداشت شخصی</h2>
+        <div class="btn-group">
+            <a href="/admin/healths/create" class="btn btn-sm btn-primary">ایجاد محصول جدید</a>
+            <a href="/admin/gullerys_h" class="btn btn-sm btn-danger">گالری تصاویر</a>
+        </div>
+    </div>
+    <form class="form-horizontal" action="/admin/healths/generate-fake-posts" method="post">
+
+        <div class="form-group row">
+            <div class="col">
+                <label for="amount" class="control-label font-weight-bold">ساختن پست ساختگی</label>
+                <input type="text" name="amount" class="form-control" placeholder="تعداد را وارد کنید">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-danger">ساختن</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>تصویر محصول</th>
+                <th>عنوان محصول</th>
+                <th>مقدار بازدید</th>
+                <th>قیمت محصول</th>
+                <th>مرتب سازی بر اساس</th>
+                <th>وضعیت محصول</th>
+                <th>تاریخ</th>
+                <th>تنظیمات</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% healths.docs.forEach(health =>{ %>
+                    <tr>
+                        <td><img src="/uploads/<%= health.file %>" class="img-fluid" width="100px" alt=""></td>
+                        <td><a href="#"><%= health.title %></a></td>
+                        <td><%= health.viewCount %></td>
+                        <td><%= health.price %></td>
+                        <td><%= health.typeToPersian() %></td>
+                         <td><%= health.typetwoToPersian() %></td>
+                        <td>
+                            <%= date(health.createdAt).format('jD jMMMM jYYYY') %>
+                        </td>
+                        <td>
+                            <form action="/admin/healths/<%= health._id %>?_method=DELETE" method="post">
+                                
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="Dso45XzqoXsAkRC8BBMQ63ZsOFS0c2tELkxR4i3Y">
+                                <div class="btn-group-sm">
+                                    <a href="/admin/healths/<%= health._id %>/edit"  class="btn btn-primary">ویرایش</a>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        
+        <%- include(viewPath('layouts/pagination') ,{ pagination : healths}) %>
+    </div>
+    
+    

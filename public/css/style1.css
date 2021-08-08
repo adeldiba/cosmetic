@@ -1,0 +1,14 @@
+:root{
+    --first-color: #0b9d8a;
+    --text-color: #8590Ad;
+    --p-color:#777777;
+    --red: #d40f0f;
+}
+:root{
+    --body-font:Vazir,'vazir';
+    --color-heading: #222222;
+    --big-font-size: 1.5rem;
+    --normal-font-size: 0.938rem;
+    --smaller-font-size: 0.875rem;  
+    
+}

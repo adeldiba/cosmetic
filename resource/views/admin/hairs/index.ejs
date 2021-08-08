@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>محصولات مو</h2>
+        <div class="btn-group">
+            <a href="/admin/hairs/create" class="btn btn-sm btn-primary">ایجاد محصول جدید</a>
+            <a href="/admin/gullerys_hair" class="btn btn-sm btn-danger">گالری تصاویر</a>
+        </div>
+    </div>
+    <form class="form-horizontal" action="/admin/hairs/generate-fake-posts" method="post">
+
+        <div class="form-group row">
+            <div class="col">
+                <label for="amount" class="control-label font-weight-bold">ساختن پست ساختگی</label>
+                <input type="text" name="amount" class="form-control" placeholder="تعداد را وارد کنید">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-danger">ساختن</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>تصویر محصول</th>
+                <th>عنوان محصول</th>
+                <th>مقدار بازدید</th>
+                <th>قیمت محصول</th>
+                <th>مرتب سازی بر اساس</th>
+                <th>وضعیت محصول</th>
+                <th>تاریخ</th>
+                <th>تنظیمات</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% hairs.docs.forEach(hair =>{ %>
+                    <tr>
+                        <td><img src="/uploads/<%= hair.file %>" class="img-fluid" width="100px" alt=""></td>
+                        <td><a href="#"><%= hair.title %></a></td>
+                        <td><%= hair.viewCount %></td>
+                        <td><%= hair.price %></td>
+                        <td><%= hair.typeToPersian() %></td>
+                         <td><%= hair.typetwoToPersian() %></td>
+                        <td>
+                            <%= date(hair.createdAt).format('jD jMMMM jYYYY') %>
+                        </td>
+                        <td>
+                            <form action="/admin/hairs/<%= hair._id %>?_method=DELETE" method="post">
+                                
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="Dso45XzqoXsAkRC8BBMQ63ZsOFS0c2tELkxR4i3Y">
+                                <div class="btn-group-sm">
+                                    <a href="/admin/hairs/<%= hair._id %>/edit"  class="btn btn-primary">ویرایش</a>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        
+        <%- include(viewPath('layouts/pagination') ,{ pagination : hairs}) %>
+    </div>
+    
+    

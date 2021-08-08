@@ -1,0 +1,161 @@
+
+  <section class="products_category mb-4 mt-5">
+    <div class="sidebar_product">
+      <div class="row">
+        <%
+            let {type , typetwo, brand,modelBrand, device, country,gender,performance } = req.query; 
+        %>
+        <div class="col-12 col-md-3 col-lg-3">
+          <div class="sidebar_box">
+            <h5>دسته بندی ها</h5>
+            <div class="line-shope"></div>
+            <ul class="list-unstyled components mb-3 mt-3">
+              <% for (i = categories_limb.length - 2; i >= 0; i--) { %>
+              <li class="active">
+                <a href="#Submenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+                  <%= categories_limb[0].name %>
+                </a>
+                <% if(categories_limb[0].childs){ %> 
+                  <% categories_limb[0].childs.forEach(cate_limb => { %>
+              <ul class="list-unstyled collapse" id="Submenu1">
+              <li>
+              <a href="/limb?category_limb=<%= cate_limb.slug %>"><%= cate_limb.name %></a>
+              </li>
+              <% }) %>
+              <% } %>
+              </ul>
+              </li>
+              
+              <% } %>
+              </ul>
+          </div>
+          <form action="/limbs" method="GET">
+          <div class="sidebar_box mt-3">
+            <h5>وضعیت محصول</h5>
+            <div class="line-shope"></div>
+            <div class="boxes mt-2">
+              <input type="checkbox" name="typetwo" value="available" <%= typetwo === 'available' ? 'checked' : '' %> id="box-2">
+              <label for="box-2" name="typetwo">موجود</label>
+            </div>
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>براساس برندها</h5>
+            <div class="line-shope"></div>
+            <% countries.forEach(coun =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= coun.slug %>"  name="country" <%= coun.slug === country ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= coun.name %></label>
+              </div>
+              <% }) %>    
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>کارایی محصول</h5>
+            <div class="line-shope"></div>
+            <% performances.forEach(perf =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= perf.slug %>"  name="performance" <%= perf.slug === performance ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= perf.name %></label>
+              </div>
+            <% }) %> 
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>جنسیت</h5>
+            <div class="line-shope"></div>
+            <% genders.forEach(gend =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= gend.slug %>"  name="gender" <%= gend.slug === gender ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= gend.name %></label>
+              </div>
+            <% }) %>    
+          </div>
+          <div class="sidebar_box mt-3">
+            <a href="#" class="btn btn-shop mt-2 btn-bubble filter">اعمال فیلتر</a>
+          </div>
+        </form>
+        </div>
+        <!--end_Sidebar-->
+        <div class="col-12 col-md-9 col-lg-9">
+          <div class="product_item">
+            <div class="product_item_heading">
+              <div class="row">
+                <% let{search} = req.query; %>
+                <% if(search) { %> 
+                  <div class="col-8 col-md-8">
+                    <h1>عبارت جستجو شده : <%= search %></h1>
+                  </div>
+                  <div class="col-4 col-md-4 text-left">
+                    <p>تعداد محصول: <span><%= limbCount %></span></p>
+                  </div>
+                  <% }else{ %> 
+                <div class="col-8 col-md-8">
+                  <h1>محصولات بدن</h1>
+                </div>
+                <div class="col-4 col-md-4 text-left">
+                  <p>تعداد محصول: <span><%= limbCount %></span></p>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            <div class="product-container mb-4">
+              <!--product-box-1-->
+              <% if(limbs.docs.length) { %> 
+              <% limbs.docs.forEach(limb => { %>
+              <div class="product-box hover hover-4">
+                <!--img-------->
+                <div class="product-img">
+                   <!--add-cart------->
+                   <span class="heart-shop">
+                    <a href="#"><i class="far fa-heart"></i></a>
+                  </span>
+                  <a href="<%= limb.path() %>">
+                  <img src="/uploads/<%= limb.file %>" alt="<%= limb.title %>">
+                </a>
+                </div>
+                <!--details-->
+                <div class="product-details">
+                  <a href="<%= limb.path() %>" class="p-name"><h2><%= limb.title %></h2></a>
+                  <% if(limb.notprice){ %>
+                    <span class="p-notprice"><%= limb.notprice %></span>
+                  <% } %>
+                  <span class="p-price"><%= limb.price %> تومان</span>
+                  <% if(limb.typetwo == 'available') { %>
+                    <div class="btn_cart">
+                        <a href="/cart/addItem_limb<%= limb.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div> 
+                  <% }else{ %>
+                      <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                      <form id="available" action="/available/<%= limb._id %>" method="POST">
+                        <div class="ui labeled button" tabindex="0">
+                        <button class="buttton p-shop_cart" type="submit">
+                        <i class="far fa-bell"></i>
+                            <%= limb.available %>                         
+                        </button>
+                    </div>
+                        
+                    </form> 
+                    <% } %>
+                </div>
+              </div>
+              <% }) %>
+              <% }else{ %>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center mr-5">
+                      <div class="never alert alert-danger mt-5 mx-auto">
+                          <p class="mt-1">محصولی یافت نشد.</p> 
+                      </div>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+
+            <%- include(viewPath('layouts/pagination') ,{ pagination : limbs}) %>
+            
+          </div>
+        </div>
+      </div><!--row-->
+    </div>
+  </section>
+
+</body>
+</html>

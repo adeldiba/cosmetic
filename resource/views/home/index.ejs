@@ -1,0 +1,460 @@
+
+<section class="slider-product mb-4" style="direction: ltr;">
+    <div
+  id="carouselBasicExample"
+  class="carousel slide carousel-fade"
+  data-mdb-ride="carousel"
+>
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0" class="active"></li>
+    <li data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1"></li>
+    <li data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2"></li>
+  </ol>
+
+  <!-- Inner -->
+  <div class="carousel-inner">
+    <!-- Single item -->
+    <div class="carousel-item active">
+      <img
+        src="images/front-view.jpg"
+        class="d-block w-100"
+        alt=""
+      >
+      <div class="carousel-caption d-none d-md-block">
+        <h5>انواع لوازم <span class="text-i">آرایشی و گریم</span></h5>
+        <p class="mt-4"> <span class="cap-p"><i class="fas fa-heart"></i> .جدید ترین محصولات ها را با ما تجربه کنید</span></p>
+        <a href="#" class="btn btn-shop mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img
+        src="images/front-view.jpg"
+        class="d-block w-100"
+        alt=""
+      >
+      <div class="carousel-caption d-none d-md-block">
+        <h5>انواع لوازم <span class="text-i">آرایشی و گریم</span></h5>
+        <p class="mt-4"> <span class="cap-p"><i class="fas fa-heart"></i> .جدید ترین محصولات ها را با ما تجربه کنید</span></p>
+        <a href="#" class="btn btn-shop mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img
+        src="images/front-view.jpg"
+        class="d-block w-100"
+        alt="">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>انواع لوازم <span class="text-i">آرایشی و گریم</span></h5>
+        <p class="mt-4"> <span class="cap-p"><i class="fas fa-heart"></i> .جدید ترین محصولات ها را با ما تجربه کنید</span></p>
+        <a href="#" class="btn btn-shop mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    </div>
+  </div>
+  <!-- Inner -->
+
+  <!-- Controls -->
+  <a
+    class="carousel-control-prev"
+    href="#carouselBasicExample"
+    role="button"
+    data-mdb-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a
+    class="carousel-control-next"
+    href="#carouselBasicExample"
+    role="button"
+    data-mdb-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+</section>
+<!--featured-Category---------->
+<section class="feature-category" style="direction: ltr;">
+  <div class="feature-heading">
+    <h3>ویژگی دسته بندی ها</h3>
+    <div class="line-shope"></div>
+  </div>
+
+  <ul id="autoWidth" class="cs-hidden">
+    <!--1----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="/cosmetics">
+          <img src="images/make-up-products.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span><b>لوازم آرایشی</b></span>
+    </li>
+    <!--2----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="/skins">
+          <img src="images/woman-hands.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span>پوست</span>
+    </li>
+    <!--3----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="hairs">
+          <img src="images/beautiful-long.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span><b>مو</b></span>
+    </li>
+    <!--4----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="limb">
+          <img src="images/4107254.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span><b>بدن</b></span>
+    </li>
+    <!--5----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="rosy">
+          <img src="images/roses-bottles-perfume.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span><b>خوشبوکننده ها</b></span>
+    </li>
+    <!--6----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="/electric">
+          <img src="images/hairdryer-curling.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span>تجهیزات برقی و آرایشی</span>
+    </li>
+    <!--7----------->
+    <li class="item">
+      <div class="feature-box">
+        <a href="health">
+          <img src="images/boy-hygienic-accessories.jpg" alt="">
+        </a>
+      </div>
+      <!--Text-------->
+      <span><b>بهداشت شخصی</b></span>
+    </li>
+  </ul>
+</section>
+<!--new-arrival----------------->
+<section class="new-arrival">
+  <!--heading-->
+  <div class="arrival-heading">
+    <h3>محصولات آرایشی و گریم</h3>
+    <div class="line-shope"></div>
+  </div>
+  <!--product-container-->
+  <div class="product-container">
+    <!--product-box-1-->
+    <% for (let i = 0; i < cosmetics.length; i++) { %>
+      <% if (i === 14) { %>
+          <%  break; %>
+      <%  }  %>
+    <div class="product-box hover hover-4">
+      <!--img-------->
+      <div class="product-img">
+         <!--add-cart------->
+         <% if(cosmetics[i].discount){ %>
+          <span class="discount">
+            <%= cosmetics[i].discount %>
+          </span>
+          <% } %>
+         <span class="heart-shop">
+          <form id="like" action="/like/<%= cosmetics[i]._id %>" method="POST">
+            <button class="details_heart" type="submit">
+                <i class="far fa-heart"></i>
+                <%= cosmetics[i].likes %>  
+            </button>
+        </form>
+          
+        </span>
+
+        <a href="<%= cosmetics[i].path() %>">
+          <div class="bg-image hover-overlay hover-zoom  ripple">
+          <img src="/uploads/<%= cosmetics[i].file %>" alt="<%= cosmetics[i].title %> ">
+         
+        </div>
+        </a>
+      </div>
+      <!--details-->
+      <div class="product-details">
+        <a href="<%= cosmetics[i].path() %>" class="p-name"><h2><%= cosmetics[i].title %></h2></a>
+        <% if(cosmetics[i].notprice){ %>
+          <span class="p-notprice"><%= cosmetics[i].notprice %></span>
+        <% } %>
+        <span class="p-price"><%= cosmetics[i].price %> تومان</span>
+        <% if(cosmetics[i].typetwo == 'available') { %>
+          <div class="btn_cart">
+              <a href="/cart/addItem<%= cosmetics[i].path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+          </div> 
+        <% }else{ %>
+            <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+            <form id="available" action="/available/<%= cosmetics[i]._id %>" method="POST">
+              <div class="ui labeled button" tabindex="0">
+              <button class="buttton p-shop_cart" type="submit">
+              <i class="far fa-bell"></i>
+                  <%= cosmetics[i].available %>                         
+              </button>
+          </div>
+              
+          </form> 
+          <% } %>
+      </div>
+    </div>
+    <% } %>     
+  </div>
+</section>
+<!--new-arrival----------------->
+<section class="new-arrival">
+  <!--heading-->
+  <div class="arrival-heading">
+    <h3>محصولات پوست</h3>
+    <div class="line-shope"></div>
+  </div>
+  <!--product-container-->
+  <div class="product-container">
+    <% for (let i = 0; i < skins.length; i++) { %>
+      <% if (i === 14) { %>
+          <%  break; %>
+      <%  }  %>
+    <!--product-box-1-->
+    <div class="product-box hover hover-4">
+      <!--img-------->
+      <div class="product-img">
+        <% if(skins[i].discount){ %>
+          <span class="discount">
+            <%= skins[i].discount %>
+          </span>
+          <% } %>
+         <!--add-cart------->
+         <span class="heart-shop">
+          
+          <a href="#"><i class="far fa-heart"></i></a>
+        </span>
+        <a href="<%= skins[i].path() %>"><img src="/uploads/<%= skins[i].file %>" alt="<%= skins[i].title %> "></a>
+      </div>
+      <!--details-->
+      <div class="product-details">
+        <a href="<%= skins[i].path() %>" class="p-name"><h2><%= skins[i].title %></h2></a>
+        <% if(skins[i].notprice){ %>
+          <span class="p-notprice"><%= skins[i].notprice %></span>
+        <% } %>
+        <span class="p-price"><%= skins[i].price %> تومان</span>
+        <% if(skins[i].typetwo == 'available') { %>
+          <div class="btn_cart">
+              <a href="/cart/addItem_skin<%= skins[i].path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+          </div> 
+        <% }else{ %>
+            <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+            <form id="available" action="/available/<%= skins[i]._id %>" method="POST">
+              <div class="ui labeled button" tabindex="0">
+              <button class="buttton p-shop_cart" type="submit">
+              <i class="far fa-bell"></i>
+                  <%= skins[i].available %>                         
+              </button>
+          </div>
+              
+          </form> 
+          <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+ 
+</section>
+<section class="new-arrival">
+  <!--heading-->
+  <div class="arrival-heading">
+    <h3>محصولات مو</h3>
+    <div class="line-shope"></div>
+  </div>
+  
+  <!--product-container-->
+  <div class="product-container">
+    <% for (let i = 0; i < hairs.length; i++) { %>
+      <% if (i === 14) { %>
+          <%  break; %>
+      <%  }  %>
+    <!--product-box-1-->
+    <div class="product-box hover hover-4">
+      <!--img-------->
+      <div class="product-img">
+        <% if(hairs[i].discount){ %>
+          <span class="discount">
+            <%= hairs[i].discount %>
+          </span>
+          <% } %>
+         <!--add-cart------->
+         <span class="heart-shop">
+          
+          <a href="#"><i class="far fa-heart"></i></a>
+        </span>
+        <a href="<%= hairs[i].path() %>"><img src="/uploads/<%= hairs[i].file %>" alt="<%= hairs[i].title %> "></a>
+      </div>
+      <!--details-->
+      <div class="product-details">
+        <a href="<%= hairs[i].path() %>" class="p-name"><h2><%= hairs[i].title %></h2></a>
+        <% if(hairs[i].notprice){ %>
+          <span class="p-notprice"><%= hairs[i].notprice %></span>
+        <% } %>
+        <span class="p-price"><%= hairs[i].price %> تومان</span>
+        <% if(hairs[i].typetwo == 'available') { %>
+          <div class="btn_cart">
+              <a href="/cart/addItemh<%= hairs[i].path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+          </div> 
+        <% }else{ %>
+            <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+            <form id="available" action="/available/<%= hairs[i]._id %>" method="POST">
+              <div class="ui labeled button" tabindex="0">
+              <button class="buttton p-shop_cart" type="submit">
+              <i class="far fa-bell"></i>
+                  <%= hairs[i].available %>                         
+              </button>
+          </div>
+              
+          </form> 
+          <% } %>
+      </div>
+    </div>
+
+  <% } %>
+</div>
+</section>
+<!--sale----------->
+<section class="sale">
+  <!--sale-box--------------------->
+  <div class="sale-box sale-back">
+    <!--img---------->
+    <img src="images/hair-care-beauty.jpg" class="img-fluid" alt="">
+    <!--text----------->
+    
+      <div class="sale-text">
+        <h2>انواع تجهیزات برقی و آرایشی</h2>
+        <a href="/electric" class="btn btn-shop mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    
+  </div>
+  <!--sale-box--------------------->
+  <div class="sale-box">
+    <!--img---------->
+    <img src="images/nice-living-room.jpg">
+    <!--text----------->
+    
+      <div class="sale-text">
+        <h2 class="h2-2">انواع لوازم تزیینی</h2>
+        <a href="/decorative" class="btn btn-shop a-2 mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    
+  </div>
+  <!--sale-box--------------------->
+  <div class="sale-box">
+    <!--img---------->
+    <img src="images/composition.jpg">
+    <!--text----------->
+      <div class="sale-text">
+        <h2>انواع لوازم بهداشت و سلامتی</h2> 
+        <a href="/health" class="btn btn-shop mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+  </div>
+</section>
+<section class="new-arrival">
+  <!--heading-->
+  <div class="arrival-heading">
+    <h3>محصولات بدن</h3>
+    <div class="line-shope"></div>
+  </div>
+  <!--product-container-->
+  <div class="product-container">
+    <% for (let i = 0; i < limbs.length; i++) { %>
+      <% if (i === 14) { %>
+          <%  break; %>
+      <%  }  %>
+    <!--product-box-1-->
+    <div class="product-box hover hover-4">
+      <!--img-------->
+      <div class="product-img">
+        <% if(limbs[i].discount){ %>
+          <span class="discount">
+            <%= limbs[i].discount %>
+          </span>
+          <% } %>
+         <span class="heart-shop">
+          <a href="#"><i class="far fa-heart"></i></a>
+        </span>
+        <img src="/uploads/<%= limbs[i].file %>" alt="<%= limbs[i].title %>">
+      </div>
+      <!--details-->
+      <div class="product-details">
+        <a href="<%= limbs[i].path() %>" class="p-name"><h2><%= limbs[i].title %></h2></a>
+        <% if(limbs[i].notprice){ %>
+          <span class="p-notprice"><%= limbs[i].notprice %></span>
+        <% } %>
+        <span class="p-price"><%= limbs[i].price %> تومان</span>
+        <% if(limbs[i].typetwo == 'available') { %>
+          <div class="btn_cart">
+              <a href="/cart/addItem_limb<%= limbs[i].path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+          </div> 
+        <% }else{ %>
+            <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+            <form id="available" action="/available/<%= limbs[i]._id %>" method="POST">
+              <div class="ui labeled button" tabindex="0">
+              <button class="buttton p-shop_cart" type="submit">
+              <i class="far fa-bell"></i>
+                  <%= limbs[i].available %>                         
+              </button>
+          </div>
+              
+          </form> 
+          <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>
+<section class="banner">
+  <!--full-slider----------------->
+  <div class="banner-box f-slide-3">
+    <!--slider-text-container---------->
+    <div class="banner-text-container">
+      <div class="banner-text">
+        <h5>انواع عطر و ادکلن های مردانه و زنانه</h5>
+        <a href="/rosy" class="btn btn-shop bac-2 mt-2 btn-bubble">همین الان خرید کن</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="web-end mt-5 mb-4">
+  <div class="web-heading">
+    <h1>وبسایت فروشگاهی گل رو</h1>
+    <h3>هدف ما راحتی و زیبایی شماست</h3>
+    <div class="line-shope"></div>
+    <% logos.forEach(logo => { %>
+    <p class="mt-4"><%- logo.body %></p>
+    <% }); %>
+  </div><br>
+  <div class="heart2">
+    <i class="fas fa-heart"></i>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<section class="rules_box mt-3 mb-3">
+    <div class="container">
+        <% guide.forEach(guide =>{ %>
+        <div class="arrival-heading">
+            <h1><%= guide.title %></h1>
+            <div class="line-shope"></div>
+          </div>
+          <div class="rules_body mt-5">
+              <p><%= guide.body %>   
+            </p>
+          </div>
+          <% }) %>
+    </div>
+</section>

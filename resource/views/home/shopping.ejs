@@ -1,0 +1,93 @@
+<section class="shopping">
+    <div class="container">
+      <% total = 0 %>
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-8 mx-auto mt-5"> 
+                <div class="cart_box">
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>قیمت کالا 
+                          <% shoppingList.forEach(item => { %>
+                            <% let sub = parseInt(item.qty * item.price) %> 
+                            <% total += +sub %>
+                          (<%= item.qty %>)
+                          <% }) %>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_box">
+                        <% shoppingList.forEach(item => { %>
+                          <% const formatter1 = new Intl.NumberFormat('en'); %>
+                          <% const num1 = parseInt(item.price.toString().replace(/,/g, ""),10); %>
+                        <span><%= formatter1.format(num1) %> تومان</span>
+                        <% }) %>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <% const formatter = new Intl.NumberFormat('en'); %>
+                  <% const num = totalPrice + parseInt(14000) %>
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>تخفیف کالا ها</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <% shoppingList.forEach(item => { %>
+                      <% if(item.notprice){ %> 
+                        <div class="price_descount">
+                          <span><%= item.notprice %> تومان</span>
+                        </div>
+                        <% } %>
+                        <% }) %>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>هزینه ارسال</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <div class="price_descount">
+                          <span>14,000 تومان</span>
+                        </div> 
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>جمع</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        <span><%= formatter.format(num) %> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>مبلغ قابل پرداخت</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        <span><%= formatter.format(num)%> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="btn_cart">
+                    <form action="/shopping/payment" method="post"> 
+                        <button type="submit" class="btn btn-bubble btn-shop">پرداخت نهایی و ثبت سفارش</button>
+                    </form>
+                  </div>
+                </div>
+                
+              </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,152 @@
+<% if (typeof cart !== "undefined"){ %>
+  <section class="cart_section">
+    <% let total = 0; %> 
+      <div class="container">
+        <div class="cart-heading">
+          <h1>سبد خرید</h1>
+          <div class="line-shope mb-3"></div>
+        </div>
+          <div class="row">
+              <div class="col-12 col-md-9 col-lg-9">
+                  <div class="cart_box">
+                      <div class="cart_item">
+                        <% cart.forEach(function(cosmetic){ %>
+                          <% let sub = parseInt(cosmetic.qty * cosmetic.price) %> 
+                          <% total += +sub %>
+                          <div class="row mb-5">
+                              <div class="col-12 col-md-3">
+                                  <div class="cart_item_img">
+                                      <img src="/uploads/<%= cosmetic.file %>" alt="">
+                                  </div>
+                              </div>
+                              
+                              <div class="col-12 col-md-9">
+                                <div class="cart_item_text">
+                                    <h2><%= cosmetic.title %></h2>
+                                  <span>ویژگی محصول :</span>
+                                  <ul>
+                                    <li>
+                                      حجم دهنده
+                                    </li>
+                                    <li>
+                                      حجم دهنده
+                                    </li>
+                                    <li>
+                                      حجم دهنده
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div class="details_model mt-4">
+                                  <p>مدل محصول : <span><%= cosmetic.model %></span></p>
+                              </div>
+                              <div class="row">
+                                <div class="col-12 col-md-5">
+                                  <div class="cart_qty text-right">
+                                    <a href="/cart/update/<%= cosmetic.title %>?action=add" class="qty_cart"><i class="fas fa-plus"></i></a>
+                                    <span class="card-number"><%= cosmetic.qty %></span>
+                                    <a href="/cart/update/<%= cosmetic.title %>?action=remove" class="qty_cart"><i class="fas fa-minus"></i></a> 
+                                    <a href="/cart/update/<%= cosmetic.title %>?action=clear" class="remove_cart"><i class="fas fa-trash-alt"></i> حذف</a>
+                                  </div>
+                                  
+                                </div>
+                                <div class="col">
+                                  <div class="cart_price text-left">
+                                    <% const formatter = new Intl.NumberFormat('en'); %>
+                                    <% const num = cosmetic.price; %>
+                                    <span><%= formatter.format(num) %> تومان</span>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            </div>
+                           
+                          </div><!--row-->
+                         
+                          <% }) %>
+                        
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-3 col-lg-3"> 
+                <div class="cart_box">
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>قیمت کالا 
+                          <% cart.forEach(cosmetic => { %>
+                          (<%= cosmetic.qty %>)
+                          <% }) %>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_box">
+                        <% cart.forEach(cosmetic => { %>
+                          <% const formatter = new Intl.NumberFormat('en'); %>
+                          <% const num = cosmetic.price; %>
+                        <span><%= formatter.format(num) %> تومان</span>
+                        <% }) %>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>تخفیف کالا ها</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <% cart.forEach(cosmetic => { %>
+                      <% if(cosmetic.notprice){ %> 
+                        <div class="price_descount">
+                          <span><%= cosmetic.notprice %> تومان</span>
+                        </div>
+                        <% } %>
+                        <% }) %>
+                    </div>
+                  </div><!--row-->
+                  <% const formatter = new Intl.NumberFormat('en'); %>
+                  <% const num = total %>
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>جمع</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        <span><%= formatter.format(num) %> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>مبلغ قابل پرداخت</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        
+                        <span><%= formatter.format(num) %> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="btn_cart">
+                    <a href="/cart/address" class="btn btn-shop mt-2 btn-bubble">ادامه فرایند خرید</a>
+                  </div>
+                </div>
+                
+              </div>
+          </div><!--row-->
+      </div>
+  </section>
+<% }else{ %>
+  <div class="col-10 col-md-12 text-center">
+    <div class="empty1 mt-5 mb-5">
+        <p>در حال حاضر سبد خرید شما <span>خالی</span> است.</p>
+        <img src="/images/icon/Shopping cart_Monochromatic.png" alt="">
+    </div>
+</div>
+<% } %>
+<!--Services------------>

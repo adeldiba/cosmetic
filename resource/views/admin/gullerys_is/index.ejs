@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>گالری تصاویر</h2>
+        <div class="btn-group">
+            <a href="/admin/gullerys_is/create" class="btn btn-sm btn-primary">ایجاد گالری تصاویر</a>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>محصول مربوطه</th>
+                <th>تصویر محصول</th>
+                <th>تاریخ</th>
+                <th>تنظیمات</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% gullerys_is.docs.forEach(gullery_is =>{ %>
+                    <tr>
+                        <td><%= gullery_is.electric.title %></td>
+                        <td><img src="/product_images/<%= gullery_is.id %>/<%= gullery_is.image %>" class="img-fluid" width="100px" alt=""></td>
+                        <td>
+                            <%= date(gullery_is.createdAt).format('jD jMMMM jYYYY') %>
+                        </td>
+                        <td>
+                            <form action="/admin/gullerys_is/<%= gullery_is._id %>?_method=DELETE" method="post">
+                                
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="Dso45XzqoXsAkRC8BBMQ63ZsOFS0c2tELkxR4i3Y">
+                                <div class="btn-group-sm">
+                                   
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        
+        <%- include(viewPath('layouts/pagination') ,{ pagination : gullerys_is}) %>
+    </div>
+    
+    

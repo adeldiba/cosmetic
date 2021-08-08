@@ -1,0 +1,130 @@
+
+  <section class="products_category mb-4 mt-5">
+    <div class="sidebar_product">
+      <div class="row">
+        
+        <!--end_Sidebar-->
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="product_item">
+            <div class="product_item_heading">
+              <div class="row">
+                <% let {search} = req.query; %>
+                <% if(search) { %> 
+                  <div class="col-8 col-md-8">
+                    <h1>عبارت جستجو شده : <%= search %></h1>
+                  </div>
+                  <div class="col-4 col-md-4 text-left">
+                    <p>تعداد محصول: <span></span></p>
+                  </div>
+                  <% }else{ %> 
+                <div class="col-8 col-md-8">
+                  <h1>جستجو</h1>
+                </div>
+                <div class="col-4 col-md-4 text-left">
+                  <p>تعداد محصول: <span></span></p>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            <div class="product-container mb-4">
+              <!--product-box-1-->
+             
+              <% if(searchs.docs.length) { %> 
+                
+              <% searchs.docs.forEach(search=> { %>
+                <% if (!search.skins){ %>
+              <div class="product-box hover hover-4">
+                <!--img-------->
+                <div class="product-img">
+                   <!--add-cart------->
+                   <span class="heart-shop">
+                    <a href="#"><i class="far fa-heart"></i></a>
+                  </span>
+                  <a href="<%= search.skin.path() %>">
+                  <img src="/uploads/<%= search.skin.file %>" alt="<%= search.skin.title %>">
+                </a>
+                </div>
+                <!--details-->
+                <div class="product-details">
+                  <a href="<%= search.skin.path() %>" class="p-name"><h2><%= search.skin.title %></h2></a>
+                  <% if(search.skin.notprice){ %>
+                    <span class="p-notprice"><%= search.skin.notprice %></span>
+                  <% } %>
+                  <span class="p-price"><%= search.skin.price %> تومان</span>
+                  <% if(search.skin.typetwo == 'available') { %>
+                    <div class="btn_cart">
+                        <a href="/cart/addItem<%= skin.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div> 
+                  <% }else{ %>
+                      <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                      <form id="available" action="/available/<%= search.skin._id %>" method="POST">
+                        <div class="ui labeled button" tabindex="0">
+                        <button class="buttton p-shop_cart" type="submit">
+                        <i class="far fa-bell"></i>
+                            <%= search.skin.available %>                         
+                        </button>
+                    </div>
+                        
+                    </form> 
+                    <% } %>
+                </div>
+              </div>
+              
+              <% }else if(search.cosmetic){ %>
+                <div class="product-box hover hover-4">
+                  <!--img-------->
+                  <div class="product-img">
+                     <!--add-cart------->
+                     <span class="heart-shop">
+                      <a href="#"><i class="far fa-heart"></i></a>
+                    </span>
+                    <a href="<%= search.cosmetic.path() %>">
+                    <img src="/uploads/<%= search.cosmetic.file %>" alt="<%= search.cosmetic.title %>">
+                  </a>
+                  </div>
+                  <!--details-->
+                  <div class="product-details">
+                    <a href="<%= search.cosmetic.path() %>" class="p-name"><h2><%= search.cosmetic.title %></h2></a>
+                    <% if(search.cosmetic.notprice){ %>
+                      <span class="p-notprice"><%= search.cosmetic.notprice %></span>
+                    <% } %>
+                    <span class="p-price"><%= search.cosmetic.price %> تومان</span>
+                    <% if(search.cosmetic.typetwo == 'available') { %>
+                      <div class="btn_cart">
+                          <a href="/cart/addItem<%= cosmetic.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                      </div> 
+                    <% }else{ %>
+                        <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                        <form id="available" action="/available/<%= search.cosmetic._id %>" method="POST">
+                          <div class="ui labeled button" tabindex="0">
+                          <button class="buttton p-shop_cart" type="submit">
+                          <i class="far fa-bell"></i>
+                              <%= search.cosmetic.available %>                         
+                          </button>
+                      </div>
+                          
+                      </form> 
+                      <% } %>
+                  </div>
+                </div>
+                <% } %>
+                <% }) %>
+              <% }else{ %>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center mr-5">
+                      <div class="never alert alert-danger mt-5 mx-auto">
+                          <p class="mt-1">محصولی یافت نشد.</p> 
+                      </div>
+                  </div>
+              </div>
+              <% } %>
+            </div> 
+          </div>
+        </div>
+      </div><!--row-->
+    </div>
+  </section>
+
+</body>
+</html>

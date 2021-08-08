@@ -1,0 +1,136 @@
+
+  <section class="cart_section">
+      <div class="container">
+        <% let total = 0; %>
+        <div class="cart-heading">
+          <h1>سبد خرید</h1>
+          <div class="line-shope mb-3"></div>
+        </div>
+          <div class="row">
+              <div class="col-12 col-md-9 col-lg-9">
+                  <div class="cart_box">
+                      <div class="cart_item">
+                          <div class="row">
+                            <% panels.forEach(panel => { %>
+                              <div class="col-12 col-md-12">
+                                <div class="cart_item_text">
+                                    <h2>آدرس تحویل سفارش</h2>
+                                </div>
+                               <div class="adress_cart mt-4">
+                                 <div class="row">
+                                   <div class="col-6 col-md-6">
+                                     <p> نام و نام خانوادگی : <span><%= panel.name_family %></span></p>
+                                   </div>
+                                   <div class="col-6 col-md-6">
+                                    <p> شماره موبایل : <span><%= panel.phone %></span></p>
+                                  </div>
+                                 </div>
+                                 <div class="row">
+                                  <div class="col-6 col-md-6">
+                                    <p> آدرس : <span><%= panel.address %></span></p>
+                                  </div>
+                                  <div class="col-6 col-md-6">
+                                   <p> کد پستی : <span><%= panel.postal_code %></span></p>
+                                 </div>
+                                </div>
+                                <div class="row mt-5">
+                                  <div class="col-sm-12 col-md-12 d-flex justify-content-center">
+                                    <div class="btn_cart ">
+                                      <a href="/user/panel/<%= panel._id %>/editAddress" class="btn btn-shop mt-2 btn-bubble">ویرایش پروفایل</a>
+                                    </div>
+                                  </div>
+                                </div>
+                               </div>
+                            </div>
+                            <% }); %>
+                          </div><!--row-->
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-3 col-lg-3"> 
+                <div class="cart_box">
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>قیمت کالا 
+                          <% cart.forEach(item => { %>
+                            <% let sub = parseInt(item.qty * item.price) %> 
+                            <% total += +sub %>
+                          (<%= item.qty %>)
+                          <% }) %>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_box">
+                        <% cart.forEach(item => { %>
+                          <% const formatter = new Intl.NumberFormat('en'); %>
+                          <% const num = parseInt(item.price.toString().replace(/,/g, ""),10); %>
+                        <span><%= formatter.format(num) %> تومان</span>
+                        <% }) %>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <% const formatter = new Intl.NumberFormat('en'); %>
+                  <% const num = totalPrice + parseInt(14000) %>
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>تخفیف کالا ها</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <% cart.forEach(item => { %>
+                      <% if(item.notprice){ %> 
+                        <div class="price_descount">
+                          <span><%= item.notprice %> تومان</span>
+                        </div>
+                        <% } %>
+                        <% }) %>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_name">
+                        <span>هزینه ارسال</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <div class="price_descount">
+                          <span>14,000 تومان</span>
+                        </div> 
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>جمع</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        <span><%= formatter.format(num) %> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-6 col-md-6 mb-2">
+                      <div class="price_total">
+                        <span>مبلغ قابل پرداخت</span>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                      <div class="price_total">
+                        <span><%= formatter.format(num) %> تومان</span>
+                      </div>
+                    </div>
+                  </div><!--row-->
+                  <div class="btn_cart">
+                    <a href="/shopping" class="btn btn-shop mt-2 btn-bubble">مرحله بعد</a>
+                  </div>
+                </div>
+                
+              </div>
+          </div><!--row-->
+      </div>
+  </section>

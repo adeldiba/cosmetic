@@ -1,0 +1,14 @@
+<section class="rules_box mt-3 mb-3">
+    <div class="container">
+        <% abouts.forEach(about =>{ %>
+        <div class="arrival-heading">
+            <h1><%= about.title %></h1>
+            <div class="line-shope"></div>
+          </div>
+          <div class="rules_body mt-5">
+              <p><%- about.body %>   
+            </p>
+          </div>
+          <% }) %>
+    </div>
+</section>

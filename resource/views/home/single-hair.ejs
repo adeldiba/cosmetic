@@ -1,0 +1,192 @@
+ <!--Product Details-->
+  <section class="shop-main section-padding">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 order-1 order-2">
+                <div class="product-details-inner left">
+                    <div class="row" id="row1">
+                        <div class="col-12 col-md-7 col-lg-7">
+                            <div class="details_right">
+                                <div class="details_heading">
+                                    <h1><%= hair.title %></h1>
+                                    <div class="details_border"></div>
+                                </div>
+                                <div class="details_text">
+                                    <p>برند محصول : <span><%= hair.model %></span></p>
+                                    <div class="details_ul">
+                                        <p>ویژگی های محصول</p>
+                                        <ul>
+                                            <li>بر اساس زنگ پوست : گندمی</li>
+                                            <li>فاقد چربی : خیر</li>
+                                            <li>SPF : ندارد</li>
+                                            <li>نوع محفظه نگهدارنده : پمپی</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="details_price">
+                                    <% if(hair.notprice){ %>
+                                        <span class="p-notprice-single"><%= hair.notprice %> تومان</span>
+                                      <% } %>
+                                    <p class="mt-2">قیمت : <span><%= hair.price %> تومان</span> </p>
+                                </div>
+                                <% if(hair.typetwo == 'available') { %>
+                                <div class="details_available">
+                                    <p>وضعیت محصول : <span><%= hair.typetwoToPersian() %> <i class="fas fa-check"></i></span></p>
+                                </div>
+                                <div class="details_cart text-left">
+                                    <form id="like" action="/like/<%= hair._id %>" method="POST">
+                                        <button class="details_heart" type="submit">
+                                            <i class="far fa-heart"></i>
+                                            <%= hair.likes %>  
+                                        </button>
+                                    </form>
+                                  <a href="/cart/addh<%= hair.path() %>" class="btn btn-shop mt-2 btn-bubble details_cart_a"><i class="fas fa-shopping-cart"></i> اضافه به سبد خرید</a>
+                                  </div>
+                                  <% }else{  %>
+                                    <div class="not_available mt-5 mb-2">
+                                        <p>وضعیت محصول : <span><%= hair.typetwoToPersian() %></span></p>
+                                        <div class="details_not_cart text-left">
+                                            <form id="like" action="/like/<%= hair._id %>" method="POST">
+                                                <button class="details_heart" type="submit">
+                                                    <i class="far fa-heart"></i>
+                                                    <%= hair.likes %>  
+                                                </button>
+                                            </form>
+                                            <form id="available" action="/available/<%= hair._id %>" method="POST">
+                                                <div class="ui labeled button" tabindex="0">
+                                                <button class="btn btn-shop mt-2 btn-bubble details_cart_a" type="submit">
+                                                    <i class="far fa-bell"></i>
+                                                    <span class="available-text">در صورت موجود شدن به من خبر بده</span>
+                                                    <%= hair.available %>
+                                                   
+                                                </button>
+                                            </div>
+                                            </form>
+                                            </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5 col-lg-5">
+                            <div class="details_left">
+                                <div class="details_img mag1">
+                                    <img data-toggle="magnify" src="/uploads/<%= hair.file %>" id="image-container" class="img-thumbnail img-rounded center-block" alt="">
+                                    <div class="nav">
+                                      <% hair.gullerys_hair.forEach(gullery_hair => { %> 
+                                      <img onclick="change_img(this)" src="/product_images/<%= gullery_hair.id %>/<%= gullery_hair.image %>" class="img-fluid" alt="">
+                                      <% }) %>
+                                     
+                                  </div> 
+                                </div>
+                                <div class="details_orginal">
+                                  <span>ضمانت اصل بودن کالا <img src="/images/icon/original.png"></span>
+                                  <span>ارسال به تمام نقاط کشور <img src="/images/icon/placeholder.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--product-details-inner-->
+              </div>
+          </div><!--row-->
+          <div class="details_tabs">
+            <!-- Pills navs -->
+              <ul class="nav nav-pills mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link active"
+                    id="ex1-tab-1"
+                    data-mdb-toggle="pill"
+                    href="#ex1-pills-1"
+                    role="tab" aria-controls="ex1-pills-1" aria-selected="true"
+                    >مشخصات محصول</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link"
+                    id="ex1-tab-2"
+                    data-mdb-toggle="pill"
+                    href="#ex1-pills-2" role="tab" aria-controls="ex1-pills-2" aria-selected="false"
+                    >دیدگاه کاربران</a>
+                </li>
+                
+              </ul>
+              <!-- Pills navs -->
+
+              <!-- Pills content -->
+              <div class="tab-content" id="ex1-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="ex1-pills-1"
+                  role="tabpanel"
+                  aria-labelledby="ex1-tab-1"
+                >
+                <%- hair.body %>
+                </div>
+                <div class="tab-pane mr fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                  
+                  <p>لطفا قبل از نوشتن نظر خود در مورد این محصول ، <a href="#">قوانین و ظوابط </a>را مطالعه کنید.</p>
+                    <%- include(viewPath('layouts/comments') , { subject : hair , comments : hair.comments}) -%>							
+                </div>
+                
+              </div>
+
+          </div>
+      </div>
+  </section>
+  <section class="new-arrival">
+    <!--heading-->
+    <div class="arrival-heading">
+      <h3>محصولات مشابه</h3>
+      <div class="line-shope"></div>
+    </div>
+    <!--product-container-->
+    <div class="product-container">
+      <!--product-box-1-->
+      <% hairs.docs.forEach(hair=> { %>
+        <div class="product-box hover hover-4">
+          <!--img-------->
+          <div class="product-img">
+             <!--add-cart------->
+             <span class="heart-shop">
+              <a href="#"><i class="far fa-heart"></i></a>
+            </span>
+            <a href="<%= hair.path() %>">
+            <img src="/uploads/<%= hair.file %>" alt="<%= hair.title %>">
+          </a>
+          </div>
+          <!--details-->
+          <div class="product-details">
+            <a href="<%= hair.path() %>" class="p-name"><h2><%= hair.title %></h2></a>
+            <% if(hair.notprice){ %>
+              <span class="p-notprice"><%= hair.notprice %></span>
+            <% } %>
+            <span class="p-price"><%= hair.price %> تومان</span>
+            <% if(hair.typetwo == 'available') { %>
+              <div class="btn_cart">
+                  <a href="/cart/addItemh<%= hair.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+              </div> 
+            <% }else{ %>
+                <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                <form id="available" action="/available/<%= hair._id %>" method="POST">
+                  <div class="ui labeled button" tabindex="0">
+                  <button class="buttton p-shop_cart" type="submit">
+                  <i class="far fa-bell"></i>
+                      <%= hair.available %>                         
+                  </button>
+              </div>
+                  
+              </form> 
+              <% } %>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </section>
+
+  <script>
+    var container = document.getElementById("image-container");
+    function change_img(image){
+        container.src = image.src;
+    }
+</script>
+  

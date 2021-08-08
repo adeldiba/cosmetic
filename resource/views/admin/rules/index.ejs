@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>محتوای قوانین و مقررات</h2>
+        <div class="btn-group">
+            <a href="/admin/rules/create" class="btn btn-sm btn-primary">ایجاد محتوای قوانین و مقررات</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>عنوان قوانین</th>
+                <th>متن قوانین</th>
+                <th>تاریخ</th>
+                <th>تنظیمات</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% rules.docs.forEach(rules =>{ %>
+                    <tr>
+                        <td><a href="#"><%= rules.title %></a></td>
+                        <td><%= rules.body %></td>
+                        <td>
+                            <%= date(rules.createdAt).format('jD jMMMM jYYYY') %>
+                        </td>
+                        <td>
+                            <form action="/admin/rules/<%= rules._id %>?_method=DELETE" method="post">
+                                
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="Dso45XzqoXsAkRC8BBMQ63ZsOFS0c2tELkxR4i3Y">
+                                <div class="btn-group-sm">
+                                    <a href="/admin/rules/<%= rules._id %>/edit"  class="btn btn-primary">ویرایش</a>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        
+        <%- include(viewPath('layouts/pagination') ,{ pagination : rules}) %>
+    </div>
+    
+    

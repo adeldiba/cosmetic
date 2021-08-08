@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | وبسایت فروشگاهی گل رو</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="alternate" type="application/rss+xml" title="فید خوان وبسایت فروشگاهی گل رو" href="/feed/cosmetic">
+    <meta name="keywords" content="<%= title %>,گل رو,
+    وبسایت گل رو,لوازم آرایشی,محصولات آرایشی,پوست,بدن,لوازم برقی
+    ">
+    <meta name="description" content="<%= key %>">
+    <meta name="generator" content="golruo">
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= key %>">
+    <meta property="og:url" content="https://golruo.com">
+    <meta property="og:site_name" content="وبسایت فروشگاهی گل رو">
+    <meta property="og:brand" content="گل رو">
+    <meta property="article:author" content="عادل دیبا">
+    <meta property="og:locale" content="fa">
+    <meta property='og:image' content='https://golruo.com/images/icon/golruo.png'>
+    <!--fav-icon-->
+    <link rel="shortcut icon" href="images/favicon-32x32.png">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="/css/mdb.min.css">
+    <!--using-box-icons---------->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!--using-fontAwesome-for-icons---------->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="/css/fontawesome.min.css">
+    <!--Slider-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css">
+    <!--fav-icon-->
+    <link rel="shortcut icon" href="images/favicon-32x32.png">
+    <!--nice-Number-->
+    <link rel="stylesheet" href="/css/jquery.nice-number.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/media.css">
+</head>
+<body>
+    <!---navigation----------------------->
+    <header class="header">
+
+        <!----social-link-and-phone-number--->
+        <div class="social-call">
+          <% logos.forEach(logo => { %>
+            <div class="phone">
+                <span>تماس: <%= logo.phone %></span>
+            </div>
+            <% }); %>
+            <!----social-links------->
+            <div class="social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div><!--sokial-call-->
+        <!--menu-bar---------->
+        <nav class="navigation navbar navbar-expand-lg rounded">
+            <!--logo------>
+            <% logos.forEach(logo => { %>
+            <a href="/" class="logo navbar-brand">
+                <img src="/uploads/<%= logo.file %>" class="img-fliud" alt="LOGO">
+            </a>
+            <% }); %>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbar">
+            <!--menu--------->
+            <div class="offcanvas-header mt-3"> 
+              <div class="row">
+                <div class="col-12 text-left">
+                  <button class="btn btn-close">
+                    <i class="fas fa-angle-down"></i> 
+                  </button>
+                </div>
+              </div> 
+              
+            </div>
+            <ul class="menu navbar-nav">
+                <li class="nav-item dropdown menu-area dmenu">
+                    <a href="#" class="nav-link dropdown-toggle"  id="mega-one" ><img src="/images/icon/makeup.png" alt=""> آرایشی 
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-one mega-area mega-area1 sm-menu" aria-labelledby="mega-one">
+                  <div class="img-back1">
+              <div class="row">
+                <% categories.forEach(category => { %>
+            <div class="col-md-3 col-12 text-center">
+               
+              <h6 class="font-weight-bold">
+                <a href="/cosmetics?category=<%= category.slug %>"> <%= category.name %> </a>
+              </h6>
+              <% if(category.childs){ %> 
+                <% category.childs.forEach(cate => { %>
+                  <ul class="list-unstyled text-right">
+                    <li>
+                      <a class="menu-item" href="/skins?category=<%= cate.slug %>">
+                        <%= cate.name %>
+                      </a>
+                    </li>
+                  </ul>
+                <% }); %>
+                <% }; %>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+        </div>
+          </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle"  id="mega-two"><img src="/images/icon/beauty-treatment.png" alt=""> پوست
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area2 sm-menu" aria-labelledby="mega-two">
+                  <div class="img-back2">
+                  <div class="row">
+                    <% categories_Skin.forEach(category_Skin => { %>
+                    <div class="col-md-3 col-sm-6 text-center">
+                      <h6 class="font-weight-bold"><a href="/skins?category_Skin=<%= category_Skin.slug %>"> 
+                        <%= category_Skin.name %></a></h6>
+                      <% if(category_Skin.childs){ %> 
+                      <% category_Skin.childs.forEach(cate_Skin => { %>
+                        <ul class="list-unstyled text-right">
+                          <li>
+                            <a class="menu-item" href="/skins?category_Skin=<%= cate_Skin.slug %>">
+                              <%= cate_Skin.name %>
+                            </a>
+                          </li>
+                        </ul>
+                      <% }); %>
+                      <% }; %>
+                    </div>
+                    <% }) %>
+                  </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="/#" class="nav-link dropdown-toggle" id="mega-three"><img src="/images/icon/woman-with-long-hair.png" alt=""> مو
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area3 sm-menu" aria-labelledby="mega-three">
+                  <div class="img-back">
+                  <div class="row">
+                    <% categories_hair.forEach(category_hair => { %>
+                      <div class="col-md-3 col-sm-6 text-center">
+                        <h6 class="font-weight-bold"><a href="/skins?category_hair=<%= category_hair.slug %>"> 
+                          <%= category_hair.name %></a></h6>
+                        <% if(category_hair.childs){ %> 
+                        <% category_hair.childs.forEach(cate_hair => { %>
+                          <ul class="list-unstyled text-right">
+                            <li>
+                              <a class="menu-item" href="/skins?category_hair=<%= cate_hair.slug %>">
+                                <%= cate_hair.name %>
+                              </a>
+                            </li>
+                          </ul>
+                        <% }); %>
+                        <% }; %>
+                      </div>
+                      <% }) %>
+                    
+                    
+                  </div><!--row-->
+                  
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle"  id="mega-fore"><img src="/images/icon/legs.png" alt=""> بدن
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area4 sm-menu" aria-labelledby="mega-fore">
+                  <div class="img-back4">
+                    <div class="row">
+                      <% categories_limb.forEach(category_limb => { %>
+                        <div class="col-md-3 col-sm-6 text-center">
+                          <h6 class="font-weight-bold"><a href="/limbs?category_limb=<%= category_limb.slug %>"> 
+                            <%= category_limb.name %></a></h6>
+                          <% if(category_limb.childs){ %> 
+                          <% category_limb.childs.forEach(cate_limb => { %>
+                            <ul class="list-unstyled text-right">
+                              <li>
+                                <a class="menu-item" href="/limbs?category_limb=<%= cate_limb.slug %>">
+                                  <%= cate_limb.name %>
+                                </a>
+                              </li>
+                            </ul>
+                          <% }); %>
+                          <% }; %>
+                        </div>
+                        <% }) %>
+                      
+                    </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle" id="mega-five" ><img src="/images/icon/retro.png" alt=""> خوشبو کننده ها
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area5 sm-menu" aria-labelledby="mega-five">
+                  <div class="img-back5">
+                    <div class="row">
+                      <% categories_rosy.forEach(category_rosy => { %>
+                        <div class="col-md-3 col-sm-6 text-center">
+                          <h6 class="font-weight-bold"><a href="/rosys?category_rosy=<%= category_rosy.slug %>"> 
+                            <%= category_rosy.name %></a></h6>
+                          <% if(category_rosy.childs){ %> 
+                          <% category_rosy.childs.forEach(cate_rosy => { %>
+                            <ul class="list-unstyled text-right">
+                              <li>
+                                <a class="menu-item" href="/rosys?category_rosy=<%= cate_rosy.slug %>">
+                                  <%= cate_rosy.name %>
+                                </a>
+                              </li>
+                            </ul>
+                          <% }); %>
+                          <% }; %>
+                        </div>
+                        <% }) %>
+                      
+                      
+                    </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle"  id="mega-six" ><img src="/images/icon/shaver.png" alt=""> تجهیزات برقی و آرایشی
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area6 sm-menu" aria-labelledby="mega-six">
+                  <div class="img-back6">
+                    <div class="row">
+                      <% categories_electric.forEach(category_electric => { %>
+                        <div class="col-md-3 col-sm-6 text-center">
+                          <h6 class="font-weight-bold"><a href="/electrics?category_electric=<%= category_electric.slug %>"> 
+                            <%= category_electric.name %></a></h6>
+                          <% if(category_electric.childs){ %> 
+                          <% category_electric.childs.forEach(cate_electric => { %>
+                            <ul class="list-unstyled text-right">
+                              <li>
+                                <a class="menu-item" href="/electrics?category_electric=<%= cate_electric.slug %>">
+                                  <%= cate_electric.name %>
+                                </a>
+                              </li>
+                            </ul>
+                          <% }); %>
+                          <% }; %>
+                        </div>
+                        <% }) %>
+                      
+                    </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle"  id="mega-seven" ><img src="/images/icon/washing-hand.png" alt=""> بهداشت شخصی
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area7 sm-menu" aria-labelledby="mega-seven">
+                  <div class="img-back2">
+                    <div class="row">
+                      <% categories_health.forEach(category_health => { %>
+                        <div class="col-md-3 col-sm-6 text-center">
+                          <h6 class="font-weight-bold"><a href="/health?category_health=<%= category_health.slug %>"> 
+                            <%= category_health.name %></a></h6>
+                          <% if(category_health.childs){ %> 
+                          <% category_health.childs.forEach(cate_health => { %>
+                            <ul class="list-unstyled text-right">
+                              <li>
+                                <a class="menu-item" href="/health?category_health=<%= cate_health.slug %>">
+                                  <%= cate_health.name %>
+                                </a>
+                              </li>
+                            </ul>
+                          <% }); %>
+                          <% }; %>
+                        </div>
+                        <% }) %>
+                      
+                    </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu">
+                  <a href="#" class="nav-link dropdown-toggle"  id="mega-eight"><img src="/images/icon/bauble.png" alt=""> دکوراتیو
+                  <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu mega-area mega-area7 sm-menu" aria-labelledby="mega-eight">
+                  <div class="img-back8">
+                    <div class="row">
+                      <% categories_decorative.forEach(category_decorative => { %>
+                        <div class="col-md-3 col-sm-6 text-center">
+                          <h6 class="font-weight-bold"><a href="/decorative?category_decorative=<%= category_decorative.slug %>"> 
+                            <%= category_decorative.name %></a></h6>
+                          <% if(category_decorative.childs){ %> 
+                          <% category_decorative.childs.forEach(cate_decorative => { %>
+                            <ul class="list-unstyled text-right">
+                              <li>
+                                <a class="menu-item" href="/decorative?category_decorative=<%= cate_decorative.slug %>">
+                                  <%= cate_decorative.name %>
+                                </a>
+                              </li>
+                            </ul>
+                          <% }); %>
+                          <% }; %>
+                        </div>
+                        <% }) %>
+                      
+                    </div><!--row-->
+                </div>
+                </div>
+              </li>
+                <li class="nav-item dropdown menu-area dmenu"><a class="nav-link" href="/contact">تماس با ما</a></li>
+                <li class="nav-item dropdown menu-area dmenu"><a class="nav-link" href="/about_us">درباره ما</a></li>
+            </ul>
+            <!--left Menu------->  
+        </div>
+        <div class="left-menu">
+          <!--search------>
+          <a href="javascript:void(0);" class="search">
+              <i class="fas fa-search"></i>
+          </a>
+          <% if(auth.check) { %> 
+            <a href="/user/panel" class="user_panel">
+              <i class="fas fa-user-cog"></i>
+          </a>
+          <% }else{ %> 
+          <!--user------>
+          <a href="/auth/login" class="user">
+              <i class="far fa-user"></i>
+          </a>
+          <% } %>
+          <!--cart-icon------>
+          <a class="num-cart" href="/cart">
+              <i class="fas fa-shopping-cart"> </i>
+              <span class="num-cart-product">
+                <% if (typeof cart !== "undefined") { %>
+                  <span><%= cart.length %></span>
+                  <% } else { %> 
+                      <span v-show="numCartItems === 0">0</span>
+                  <% } %>
+              </span>
+           
+          </a>
+      </div>
+        </nav>
+          <!-- Navbar -->
+          <!--search-bar-------------->
+          <form action="/search" method="GET">
+          <div class="search-bar">
+            <div class="search-input">
+              <input type="text" name="search" id="search" placeholder="محصول خود را بگرد پیدا کن ....">
+              <button type="submit">
+                <img src="/images/icon/search.png" width="24" height="24">
+            </button>
+            </div>
+          </div>
+        </form>
+  </header>
+
+    <%- body %>
+  <section class="services">
+    <div class="services-box">
+      <i class="fas fa-shipping-fast"></i>
+      <span>ارسال پست سریع</span>
+    </div>
+    <div class="services-box">
+      <i class="fas fa-headphones-alt"></i>
+      <span>ارسال پست سریع</span>
+    </div>
+    <div class="services-box">
+      <i class="fas fa-sync"></i>
+      <span>ارسال پست سریع</span>
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="footer-box">
+      <div class="footer-heading">
+        <h4>وبسایت فروشگاهی صدف</h4>
+        <div class="line-shope"></div>
+      </div>
+      <% logos.forEach(logo => { %>
+      <div class="footer-text">
+        <p><%- logo.body2 %>
+        </p>
+      </div>
+      <% }) %>
+    </div>
+    <div class="footer-box">
+      <div class="footer-heading">
+        <h4>دسترسی سریع</h4>
+        <div class="line-shope"></div>
+      </div>
+      <div class="footer-text">
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="#!" class="text-white">لوازم آرایشی</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">پوست</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">مو</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">بدن</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">خوشبوکننده ها</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">تجهیزات برقی و آرایشی</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">بهداشت شخصی</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">دکوراتیو</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-box">
+      <div class="footer-heading">
+        <h4>خدمات مشتریان</h4>
+        <div class="line-shope"></div>
+      </div>
+      <div class="footer-text">
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="/rules" class="text-white">قوانین و مقررات</a>
+          </li>
+          <li>
+            <a href="/return_product" class="text-white">رویه بازگرداندن کالا</a>
+          </li>
+          <li>
+            <a href="/site_usage_guide" class="text-white">راهنمای خرید</a>
+          </li>
+          <li>
+            <a href="/response" class="text-white">پاسخ به پرسش های متداول</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">درباره ما</a>
+          </li>
+          <li>
+            <a href="/contact" class="text-white">تماس باما</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+    <div class="footer-box box_3">
+      <div class="footer-heading">
+        <h4>ارتباط با ما</h4>
+        <div class="line-shope"></div>
+      </div>
+      <div class="footer-text">
+        <ul class="list-unstyled ul-2 mb-0">
+          <% logos.forEach(logo => { %>
+          <li>
+            <i class="fas fa-home"></i> <%= logo.address %>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i> <%= logo.email %>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i> <%= logo.phone %>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-box box_4">
+      <div class="footer-heading">
+        <h4>درگاه پرداخت</h4>
+        <div class="line-shope"></div>
+      </div>
+      <div class="zarin mt-3">
+        <img src="/images/zarinpal-badge.png" alt="">
+      </div>
+    </div>
+    <div class="footer-border">
+    </div>
+    <div class="footer-end">
+      <div class="row">
+        <div class="col-12 col-md-6 text-right">
+          <p>تمام حقوق این وبسایت نزد صدف محفوظ است</p>
+        </div>
+        <div class="col-12 col-md-6 text-left">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a id="back-to-top" href="#" class="btn back-to-top" role="button"><i class="fas fa-arrow-up"></i></a>
+  <div class="menu_anim">
+  <div class="menu">
+    <ul class="toggle">
+        <li class="ico01"></li>
+        <li class="move-ico ico02"></li>
+        <li class="move-ico ico03"></li>
+        <li class="move-ico ico04"></li>
+    </ul>
+    <!-- filters -->
+   
+</div>
+<div class="menu-object">
+    <ul class="toggle">
+        <li class="ico01"></li>
+        <li class="move-ico ico02">
+            <a href="#" target="_blank" class="link link01">
+              <i class='bx bxl-instagram'></i>
+            </a>
+        </li>
+        <li class="move-ico ico03">
+            <a href="https://github.com/hisamikurita" target="_blank" class="link link02">
+              <i class='bx bxl-telegram' ></i>
+            </a>
+        </li>
+        <li class="move-ico ico04">
+            <a href="/contact" target="_blank" class="link link03">
+              <i class='bx bxs-phone-call'></i>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
+  <script src="/js/jquery.nice-number.js"></script>
+  <script src="/js/provinces.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+    var container = document.getElementById("image-container");
+    function change_img(image){
+        container.src = image.src;
+    }
+</script>
+  <script>
+    $('#sendCommentModal').on('show.bs.modal' , function(event) {
+        let button = $(event.relatedTarget);
+        let parentId = button.data('parent');
+        let modal = $(this);
+        modal.find("[name='parent']").val(parentId);
+    });
+</script>
+<% let sweetalert = req.flash('sweetalert')
+if(sweetalert.length) {
+  let data = sweetalert[0]; %>
+  <script>
+    Swal.fire({
+      title: '<%= data.title %>',
+      text: '<%= data.message %>',
+      icon: '<%= data.icon %>',
+      showConfirmButton: <%= data.button !== null ? true : false %>,
+      confirmButtonText: '<%= data.button %>',
+      timer : <%= data.button !== null ? 'null' : data.timer %>,
+    })
+  </script>
+<% } %>
+  
+  </body>
+  </html>

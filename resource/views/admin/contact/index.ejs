@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>تماس کاربران با مدیر</h2>
+    </div>
+    <p>این قسمت مربوط به تماس با مای وبسایت است که کاربران با پیشنهاد و انتقاد خود را به شما ارسال میکنند.</p>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>نام کاربر</th>
+                <th>ایمیل کاربر</th>
+                <th>شماره همراه</th>
+                <th>موضوع پیام</th>
+                <th>متن پیام</th>
+                <th>تاریخ</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+                <% contacts.docs.forEach(contact => { %>
+                    <tr>
+                        <td><%= contact.name_family %></td>
+                        <td><%= contact.email %></td>
+                        <td><%= contact.phone %></td>
+                        <td><%= contact.topic %></td>
+                        <td><%- contact.body %></td>
+                        <td><%= date(contact.createdAt).format('jD jMMMM jYYYY') %></td>
+                        
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <%- include(viewPath('layouts/pagination') ,{ pagination : contacts}) %>
+    </div>
+    
+    

@@ -1,0 +1,99 @@
+<section class="buy_section"> 
+        <div class="container">
+            <% let total = 0; %> 
+            <div class="row">
+                <div class="col-12 col-md-9 col-lg-9">
+                    <div class="buy_box">
+                        <div class="buy_item">
+                            <div class="row mb-5">
+                                <div class="col-12 col-md-12 text-center">
+                                    <div class="buy_icon">
+                                        <span class="not_success">
+                                          <i class='bx bx-x'></i>
+                                    </span>
+                                    <p class="mt-5 not_p">سفارش شما ثبت شد اما پرداخت ناموفق بود.</p>
+                                    <p class="not_p2">برای جلوگیری از لغو سیستمی سفارش، تا یک ساعت آینده پرداخت را انجام دهید.</p>
+                                    <p class="not_p3">چنانچه طی این فرایند مبلغی از حساب شما کسر شده است، طی 72 ساعت آینده به حساب شما باز خواهد گشت.</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3"> 
+                  <div class="cart_box">
+                    <div class="row">
+                      <div class="col-6 col-md-6 mb-2">
+                        <div class="price_name">
+                          <span>نام تحویل گیرنده :
+                            
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-6">
+                        <div class="price_box">
+                          <% panels.forEach(panel => { %>
+                          <span><%= panel.name_family %></span>
+                        <% }); %>
+                        </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="row">
+                      <div class="col-6 col-md-6 mb-2">
+                        <div class="price_name">
+                          <span>شماره تماس :</span>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-6">
+                       
+                          <div class="price_descount">
+                            <% panels.forEach(panel => { %>
+                                <span><%= panel.phone %></span>
+                              <% }); %>
+                          </div>
+                      </div>
+                    </div><!--row-->
+                    
+                    <div class="row">
+                      <div class="col-6 col-md-6 mb-2">
+                        <div class="price_total">
+                          <span>مبلغ کل :</span>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-6">
+                        <% cart.forEach(function(cosmetic){ %>
+                            <% let sub = parseInt(cosmetic.qty * cosmetic.price) %> 
+                            <% total += +sub %>
+                            <% }) %>
+                        <div class="price_total">
+                            <% const formatter = new Intl.NumberFormat('en'); %>
+                            <% const num = total + 14000 %>
+                          <span><%= formatter.format(num) %> تومان</span>
+                        </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="row">
+                      <div class="col-12 col-md-12 mb-2">
+                        <div class="buy_address">
+                          <span>آدرس :</span>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12">
+                        <div class="buy_address2">
+                            <% panels.forEach(panel => { %>
+                                <span><%= panel.address %></span>
+                            <% }); %>
+                        </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="btn_cart">
+                      <a href="/shopping" class="btn btn-shop mt-2 btn-bubble">پرداخت مجدد</a>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div><!--row-->
+        </div>
+    </section>
+  
+  <!--Services------------>

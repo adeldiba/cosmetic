@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-sm-12 col-md-10">
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+            <h2>ویرایش گالری تصاویر</h2>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-2">
+        <div class="text-left">
+            <a href="/admin/gullerys" type="submit" class="btn btn-info">بازگشت</a>
+        </div>
+    </div>
+</div><!--row-->
+
+<form class="form-horizontal" action="/admin/gullerys/<%= gullery._id %>?_method=put" method="post" enctype="multipart/form-data">
+
+    <%- include(viewPath('layouts/error-messages')) -%>
+    <div class="form-group">
+        <label for="">Current Image</label>
+        <p>
+           <% if (image == "") { %>
+            <img id="no-image" src="/images/no-image.png" alt=""> 
+           <% } else { %>
+            <img id="no-image" src="/product_images/<%= id %>/<%= image %>" alt=""> 
+           <% } %> 
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label for="">Upload Image</label>
+        <input type="file" class="form-control" name="image" id="img">
+        <img src="#" id="imgPreview" alt="">
+    </div>
+    
+    <input type="hidden" name="pimage" value="<%= image %>">
+    <div class="form-group row">
+        <div class="col">
+            <label for="cosmetic" class="control-label font-weight-bold font-weight-bold">محصول مربوطه</label>
+            <select name="cosmetic" id="cosmetic" class="form-control">
+                <% cosmetics.forEach(cosmetic => { %> 
+                    <option value="<%= cosmetic._id %>" <%= String(old('cosmetic', gullery.cosmetic)) == String(cosmetic._id) ? 'selected' : '' %> ><%= cosmetic.title %></option>
+                <% }) %>
+            </select>
+        </div>
+        </div>
+    <div class="form-group row">
+        
+       
+    </div>
+</form>
+
+<hr>
+<h3 class="page-header">گالری تصاویر</h3>
+
+<ul class="gallery">
+    <% galleryImages.forEach(function(image) { %> 
+    <% if (image !="thumbs") { %> 
+    <li>
+        <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>" alt=""> &nbsp;
+        <a class="confirmDeletion btn btn-danger" href="/admin/gullerys/<%= image %>?id=<%= id %>">delete</a>
+    </li>
+    <% } %>
+    <% }); %>
+</ul>
+
+<br><br>
+<form action="/admin/gullerys/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </div>
+</form>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+<script>
+
+    function readURL(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function(e){
+               $('#imgPreview').attr('src', e.target.result).width(100).height(100); 
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#img").change(function(){
+        readURL(this);
+    });
+
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*",
+        init: function(){
+            this.on("queuecomplete", function(file){
+                setTimeout(function(){
+                    location.reload()
+                }, 1000);
+            });
+        }
+    }
+
+</script>

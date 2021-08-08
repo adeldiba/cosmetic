@@ -1,0 +1,91 @@
+
+  <section class="products_category mb-4 mt-5">
+    <div class="sidebar_product">
+      <div class="row">
+        
+        <!--end_Sidebar-->
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="product_item">
+            <div class="product_item_heading">
+              <div class="row">
+                <% let {search} = req.query; %>
+                <% if(search) { %> 
+                  <div class="col-8 col-md-8">
+                    <h1>عبارت جستجو شده : <%= search %></h1>
+                  </div>
+                  <div class="col-4 col-md-4 text-left">
+                    <p>تعداد محصول: <span></span></p>
+                  </div>
+                  <% }else{ %> 
+                <div class="col-8 col-md-8">
+                  <h1>محصولات آرایشی</h1>
+                </div>
+                <div class="col-4 col-md-4 text-left">
+                  <p>تعداد محصول: <span></span></p>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            <div class="product-container mb-4">
+              <!--product-box-1-->
+              <% if(cosmetics.docs.length) { %> 
+              <% cosmetics.docs.forEach(cosmetic=> { %>
+              <div class="product-box hover hover-4">
+                <!--img-------->
+                <div class="product-img">
+                   <!--add-cart------->
+                   <span class="heart-shop">
+                    <a href="#"><i class="far fa-heart"></i></a>
+                  </span>
+                  <a href="<%= cosmetic.path() %>">
+                  <img src="/uploads/<%= cosmetic.file %>" alt="<%= cosmetic.title %>">
+                </a>
+                </div>
+                <!--details-->
+                <div class="product-details">
+                  <a href="<%= cosmetic.path() %>" class="p-name"><h2><%= cosmetic.title %></h2></a>
+                  <% if(cosmetic.notprice){ %>
+                    <span class="p-notprice"><%= cosmetic.notprice %></span>
+                  <% } %>
+                  <span class="p-price"><%= cosmetic.price %> تومان</span>
+                  <% if(cosmetic.typetwo == 'available') { %>
+                    <div class="btn_cart">
+                        <a href="/cart/addItem<%= cosmetic.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div> 
+                  <% }else{ %>
+                      <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                      <form id="available" action="/available/<%= cosmetic._id %>" method="POST">
+                        <div class="ui labeled button" tabindex="0">
+                        <button class="buttton p-shop_cart" type="submit">
+                        <i class="far fa-bell"></i>
+                            <%= cosmetic.available %>                         
+                        </button>
+                    </div>
+                        
+                    </form> 
+                    <% } %>
+                </div>
+              </div>
+              <% }) %>
+              <% }else{ %>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center mr-5">
+                      <div class="never alert alert-danger mt-5 mx-auto">
+                          <p class="mt-1">محصولی یافت نشد.</p> 
+                      </div>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+
+            <%- include(viewPath('layouts/pagination') ,{ pagination : cosmetics}) %>
+            
+          </div>
+        </div>
+      </div><!--row-->
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+
+  <section class="products_category mb-4 mt-5">
+    <div class="sidebar_product">
+      <div class="row">
+        
+        <!--end_Sidebar-->
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="product_item">
+            <div class="product_item_heading">
+              <div class="row">
+                <% let {search} = req.query; %>
+                <% if(search) { %> 
+                  <div class="col-8 col-md-8">
+                    <h1>عبارت جستجو شده : <%= search %></h1>
+                  </div>
+                  <div class="col-4 col-md-4 text-left">
+                    <p>تعداد محصول: <span></span></p>
+                  </div>
+                  <% }else{ %> 
+                <div class="col-8 col-md-8">
+                  <h1>محصولات آرایشی</h1>
+                </div>
+                <div class="col-4 col-md-4 text-left">
+                  <p>تعداد محصول: <span></span></p>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            <div class="product-container mb-4">
+              <!--product-box-1-->
+              <% if(skins.docs.length) { %> 
+              <% skins.docs.forEach(skin=> { %>
+              <div class="product-box hover hover-4">
+                <!--img-------->
+                <div class="product-img">
+                   <!--add-cart------->
+                   <span class="heart-shop">
+                    <a href="#"><i class="far fa-heart"></i></a>
+                  </span>
+                  <a href="<%= skin.path() %>">
+                  <img src="/uploads/<%= skin.file %>" alt="<%= skin.title %>">
+                </a>
+                </div>
+                <!--details-->
+                <div class="product-details">
+                  <a href="<%= skin.path() %>" class="p-name"><h2><%= skin.title %></h2></a>
+                  <% if(skin.notprice){ %>
+                    <span class="p-notprice"><%= skin.notprice %></span>
+                  <% } %>
+                  <span class="p-price"><%= skin.price %> تومان</span>
+                  <% if(skin.typetwo == 'available') { %>
+                    <div class="btn_cart">
+                        <a href="/cart/addItem<%= skin.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div> 
+                  <% }else{ %>
+                      <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                      <form id="available" action="/available/<%= skin._id %>" method="POST">
+                        <div class="ui labeled button" tabindex="0">
+                        <button class="buttton p-shop_cart" type="submit">
+                        <i class="far fa-bell"></i>
+                            <%= skin.available %>                         
+                        </button>
+                    </div>
+                        
+                    </form> 
+                    <% } %>
+                </div>
+              </div>
+              <% }) %>
+              <% }else{ %>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center mr-5">
+                      <div class="never alert alert-danger mt-5 mx-auto">
+                          <p class="mt-1">محصولی یافت نشد.</p> 
+                      </div>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+
+            <%- include(viewPath('layouts/pagination') ,{ pagination : skins}) %>
+            
+          </div>
+        </div>
+      </div><!--row-->
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<section class="profile-area mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-3 text-right">
+                <%- include(viewPath('home/panel/sidebar')); %>
+            </div>
+            <div class="col-12 col-md-9 col-lg-9 text-right">
+                <div class="profile-left pt-3">
+                    <div class="profile-title mb-4">
+                        <h4>لیست علاقه مندی ها</h4>
+                    </div>
+                    <% if(likes.docs.length ){ %> 
+                    <% likes.docs.forEach(like => { %>
+                        
+                    <div class="favorites mt-5 mb-5">
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-4 col-lg-4">
+                                <div class="item-favorites">
+                                    <img src="/uploads/<%= like.cosmetic.file %>" class="img-fluid" alt="<%= like.cosmetic.title %>">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="item-favorites">
+                                    <h3><%= like.cosmetic.title %></h3>
+                                    <ul class=" mt-4">
+                                        <li>مدل محصول : <span class="favorites-model"><%= like.cosmetic.model %></span></li>
+                                        <% if(like.cosmetic.typetwo == 'available') { %>
+                                        <li>وضعیت محصول : <span class="available-success"><%= like.cosmetic.typetwoToPersian() %></span></li>
+                                        <% }else{ %>
+                                        <li>وضعیت محصول : <span class="available-danger"><%= like.cosmetic.typetwoToPersian() %></span></li>
+                                        <% } %>
+                                    </ul>
+                                    <div class="favorites-time ">
+                                      <span >زمان اضافه شدن به لیست علاقه مندی : <span class="time"><%= date(like.createdAt).format('jD jMMMM jYYYY') %></span></span> <br> 
+                                      <span>قیمت محصول : <span class="price"><%= like.cosmetic.price %> تومان </span></span>
+                                      <form class="mt-3" action="/user/panel/favorites/<%= like._id %>?_method=DELETE" method="post">
+                                        <div class="btn-group-sm">
+                                            <button type="submit" class="btn btn-danger">حذف از لیست علاقه مندی ها</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div><!--item-favorites-->
+                            </div>
+                            
+                        </div><!--row-->
+                        <hr>
+                    </div>
+                    
+                    <% }); %>
+                    <%- include(viewPath('layouts/pagination') ,{ pagination : likes}) %>
+                    <% }else{ %>
+                        <div class="row">
+                            <div class="history-empty text-center">
+                                <p class="mx-auto">
+                                    علاقه مندی شما به محصول مورد نظر خالی است.
+                                </p>
+                                <img src="/images/icon/SmartColor.png" alt="">
+                            </div>
+                        </div>
+                   <% } %>
+
+                </div><!--profile-left-->
+            </div>
+        </div><!--row-->
+    </div>
+</section>

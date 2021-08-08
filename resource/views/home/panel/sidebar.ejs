@@ -1,0 +1,28 @@
+<div class="panel_sidebar">
+    <div class="user_img mb-4">
+        <div class="row">
+          <div class="col-3 col-md-3">
+              <img src="/images/icon/user.png">
+          </div>
+          <div class="col-7 col-md-8">
+              <div class="name_panel mt-1">
+                  <span><%= req.user.name %></span>
+              </div>
+              <div class="phone_panel">
+                  <span>09339419658</span>
+              </div>
+          </div>
+        </div><!--row-->
+    </div><!--user_img-->
+    <div class="panel_sidebar_list">
+        <ul>
+            <li><a href="/user/panel" class="<%= req.url == '/user/panel' ? 'active' : ''%>"><img src="/images/icon/home.png"> داشبورد</a></li>
+            <li><a href="/user/panel/history" class="<%= req.url == '/user/panel/history' ? 'active' : ''%>"><img src="/images/icon/check-list.png"> سفارش های من</a></li>
+            <li><a href="/user/panel/favorites"><img src="/images/icon/heart.png"> لیست علاقه مندی ها</a></li>
+            <li><a href="/user/panel/comment" class="<%= req.url == '/user/panel/comment' ? 'active' : ''%>"><img src="/images/icon/comment.png"> نظرات</a></li>
+            <li><a href="#"><img src="/images/icon/email.png"> پیغام ها</a></li>
+            <li><a href="#"><img src="/images/icon/user2.png"> اطلاعات حساب</a></li>
+            <li><a href="/logout"><img src="/images/icon/logout.png"> خروج</a></li>
+        </ul>
+    </div>
+</div>

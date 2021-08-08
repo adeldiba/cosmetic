@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-3 border-bottom-1">
+        <h2>دسته های پوست</h2>
+        <div class="btn-group">
+            <a href="/admin/categories_Skin/create" class="btn btn-sm btn-primary">افزودن دسته جدید</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>عنوان دسته</th>
+                <th>نوع</th>
+                <th>تنظیمات</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% categories_Skin.docs.forEach(category_Skin => { %>
+                    <tr>
+                        <td><a href="#"><%= category_Skin.name %></a></td>
+                        <td><%= category_Skin.parent ? category_Skin.parent.name : 'دسته اصلی' %></td>
+                        <td>
+                            <form action="/admin/categories_Skin/<%= category_Skin.id %>?_method=DELETE" method="post">
+                                
+                                <div class=" btn-group-sm"> 
+                                    <a href="/admin/categories_Skin/<%= category_Skin.id %>/edit"  class="btn btn-primary">ویرایش</a>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <%- include(viewPath('layouts/pagination') ,{ pagination : categories_Skin}) %>
+    </div>
+    
+    

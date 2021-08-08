@@ -1,0 +1,146 @@
+
+  <section class="section_panel">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-md-3 col-lg-3">
+                <%- include(viewPath('home/panel/sidebar')); %>
+              </div>
+              <div class="col-12 col-md-9 col-lg-9">
+                <div class="panel_main">
+                    <div class="panel_main_heading">
+                        <h2>اطلاعات شخصی</h2>
+                    </div>
+                    <div class="panel_main_form">
+                        <% if(panels.length){ %>
+                            <% panels.forEach(panel =>{ %>
+                                <div class="profile-item mt-5">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 col-lg-6">
+                                            <div class="profile-add">
+                                                <p> نام و نام خانوادگی : <span class="pro-u"><%= panel.name_family %></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6">
+                                            <div class="profile-add">
+                                                <p> کد ملی : <span class="pro-u"><%= panel.codeM %></span></p>    
+                                            </div>
+                                        </div>
+                                        </div><!--row-->
+                                        <div class="row">
+                                        <div class="col-6 col-md-6 col-lg-6">
+                                            <div class="profile-add">
+                                                
+                                                <p> استان : <span class="pro-u"><%= panel.state %></span></p>
+                                                <p> شهر : <span class="pro-u"><%= panel.city %></span></p>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6">
+                                            <div class="profile-add">
+                                                <p> کد پستی : <span class="pro-u"><%= panel.postal_code %></span></p>
+                                                <p> شماره موبایل : <span class="pro-u"><%= panel.phone %></span></p>
+                                            </div>
+                                        </div>
+                                        </div><!--row-->
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="profile-add">
+                                                    <p> آدرس : <span class="pro-u"><%= panel.address %></span></p>
+                                                </div>
+                                            </div>
+                                            </div><!--row-->
+            
+            
+                                    <form action="/user/panel/<%= panel._id %>?_method=DELETE" method="post">
+                                            
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type="hidden" name="_token" value="Dso45XzqoXsAkRC8BBMQ63ZsOFS0c2tELkxR4i3Y">
+                                        
+                                        <div class="form-a text-center mt-4">
+                                            <a href="/user/panel/<%= panel._id %>/editAddress"  class="style-btn-1 color-1">ویرایش</a>
+                                        </div>
+                                        <div class="form-b text-center">
+                                            <div class="row">
+                                                <button type="submit" class="style-btn-1 color-3">حذف</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="mt-2 mb-2">
+                            <% }); %>
+                            <% }else{ %>
+                        <form action="/user/panel" method="POST">
+                            <%- include(viewPath('layouts/error-messages')) -%>
+                            <div class="form-group">
+                              <div class="row">
+                                  <div class="col">
+                                      <label for="name_family">نام و نام خانوادگی</label>
+                                      <input type="text" name="name_family" id="name_family" value="<%= old('name_family')%>"  class="form-control" aria-describedby="emailHelp" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                                  </div>
+                                  <div class="col">
+                                      <label for="phone">شماره موبایل</label>
+                                      <input type="text" name="phone" id="phone" value="<%= old('phone')%>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا شماره موبایل خود را وارد کنید">
+                                  </div>
+                              </div>
+                            </div>
+                                <div class="form-group">
+                                  <div class="row">
+                                  <div class="col">
+                                      <label for="codeM">کد ملی</label>
+                                      <input type="text" name="codeM" id="codeM" value="<%= old('codeM') %>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا کد ملی خود را بدرستی وارد کنید">
+                                  </div>
+                                  <div class="col">
+                                      <label for="postal_code">کد پستی</label>
+                                      <input type="text" name="postal_code" id="postal_code" value="<%= old('postal_code') %>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا کد پستی خود را به درستی وارد کنید">
+                                  </div>
+                              </div>
+                                  </div>
+                                
+                                  <div class="form-group">
+                                    <div class="row">
+                                      <div class="col">
+                                        <label for="exampleForm2">استان</label>
+                                        <span class="input-group-text m-s" id="basic-addon1">
+                                            <i class="fas fa-caret-down"></i>
+                                        </span>
+                                        <select name="state" id="state" value="<%= old('state') %>" class="province month-input form-control">       
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                      <label for="exampleForm2">شهر</label>
+                                      <span class="input-group-text m-s" id="basic-addon1">
+                                          <i class="fas fa-caret-down"></i>
+                                      </span>
+                                          <select name="city" id="city" value="" class="city month-input form-control">
+                                            <option value="selectvalues"<%= old('city') === 'آذربایجان‌شرقی' ? 'selected' : '' %>></option>
+                                            <option value="'چهارمحال‌و‌بختیاری'"<%= old('city') === 'چهارمحال‌و‌بختیاری' ? 'selected' : '' %>></option>
+                                            <option value="selectvalues"<%= old('city') === 'خراسان‌جنوبی' ? 'selected' : '' %>></option>
+                                            <option value="selectvalues"<%= old('city') === 'خراسان‌رضوی' ? 'selected' : '' %>></option>
+                                          </select>
+                                      
+                                  </div>
+                                        </div><!--row-->
+                            </div>
+
+                            <div class="form-group">
+                              <label for="address">آدرس</label>
+                              <input type="text" name="address" id="address" value="<%= old('address') %>" class="form-control" placeholder="لطفا آدرس خود را کامل و درست وارد کنید">
+                            </div>
+                            <div class="form-group mt-4">
+                                <%- recaptcha %>
+                                </div>
+                            <div class="panel_btn mt-5 text-left">
+                              <button type="submit" class="btn">ثبت اطلاعات شخصی</button>
+                            </div>
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+              </div>
+          </div><!--row-->
+      </div>
+  </section>
+
+
+
+

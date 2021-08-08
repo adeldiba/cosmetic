@@ -1,0 +1,80 @@
+
+    <section class="buy_section"> 
+        <div class="container">
+            <% let total = 0; %> 
+            <div class="row">
+                <div class="col-12 col-md-9 col-lg-9">
+                    <div class="buy_box mb-4">
+                        <div class="buy_item">
+                            <div class="row mb-5">
+                                <div class="col-12 col-md-12 text-center">
+                                    <div class="buy_icon">
+                                        <span class="success_shop">
+                                          <i class="fas fa-check"></i>
+                                    </span>
+                                    <p class="mt-5 success_p">سفارش شما با موفقیت پرداخت و ثبت شد.</p>
+                                    <p class="not_p2">پرداخت با موفقیت انجام شد.سفارش شما باموفقیت ثبت شد و در زمان تعیین شده برای شما ارسال خواهد شد.از این که مارا برای خرید انتخاب کردید از شما سپاسگذاریم. </p>
+                                    
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3"> 
+                  <div class="cart_box">
+                    <div class="row">
+                      <div class="col-6 col-md-6 mb-2">
+                        <div class="price_name">
+                          <span>نام تحویل گیرنده :
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-6">
+                        <div class="price_box">
+                          <% panels.forEach(panel => { %>
+                          <span><%= panel.name_family %></span>
+                        <% }); %>
+                        </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="row">
+                      <div class="col-6 col-md-6 mb-2">
+                        <div class="price_name">
+                          <span>شماره تماس :</span>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-6">
+                       
+                          <div class="price_descount">
+                            <% panels.forEach(panel => { %>
+                                <span><%= panel.phone %></span>
+                              <% }); %>
+                          </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="row">
+                      <div class="col-12 col-md-12 mb-2">
+                        <div class="buy_address">
+                          <span>آدرس :</span>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12">
+                        <div class="buy_address2">
+                            <% panels.forEach(panel => { %>
+                                <span><%= panel.address %></span>
+                            <% }); %>
+                        </div>
+                      </div>
+                    </div><!--row-->
+                    <div class="btn_cart">
+                      <a href="/shopping" class="btn btn-shop mt-2 btn-bubble">پیگیری سفارش</a>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div><!--row-->
+        </div>
+    </section>
+  
+  <!--Services------------>

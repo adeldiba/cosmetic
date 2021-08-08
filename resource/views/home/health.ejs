@@ -1,0 +1,161 @@
+
+  <section class="products_category mb-4 mt-5">
+    <div class="sidebar_product">
+      <div class="row">
+        <%
+            let {type , typetwo, brand,modelBrand, device, country,gender,performance } = req.query; 
+        %>
+        <div class="col-12 col-md-3 col-lg-3">
+          <div class="sidebar_box">
+            <h5>دسته بندی ها</h5>
+            <div class="line-shope"></div>
+            <ul class="list-unstyled components mb-3 mt-3">
+              <% for (i = categories_health.length - 2; i >= 0; i--) { %>
+              <li class="active">
+                <a href="#Submenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">
+                  <%= categories_health[0].name %>
+                </a>
+                <% if(categories_health[0].childs){ %> 
+                  <% categories_health[0].childs.forEach(cate_health => { %>
+              <ul class="list-unstyled collapse" id="Submenu1">
+              <li>
+              <a href="/health?category_health=<%= cate_health.slug %>"><%= cate_health.name %></a>
+              </li>
+              <% }) %>
+              <% } %>
+              </ul>
+              </li>
+              
+              <% } %>
+              </ul>
+          </div>
+          <form action="/cosmetics" method="GET">
+          <div class="sidebar_box mt-3">
+            <h5>وضعیت محصول</h5>
+            <div class="line-shope"></div>
+            <div class="boxes mt-2">
+              <input type="checkbox" name="typetwo" value="available" <%= typetwo === 'available' ? 'checked' : '' %> id="box-2">
+              <label for="box-2" name="typetwo">موجود</label>
+            </div>
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>براساس برندها</h5>
+            <div class="line-shope"></div>
+            <% countries.forEach(coun =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= coun.slug %>"  name="country" <%= coun.slug === country ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= coun.name %></label>
+              </div>
+              <% }) %>    
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>کارایی محصول</h5>
+            <div class="line-shope"></div>
+            <% performances.forEach(perf =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= perf.slug %>"  name="performance" <%= perf.slug === performance ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= perf.name %></label>
+              </div>
+            <% }) %> 
+          </div>
+          <div class="sidebar_box mt-3">
+            <h5>جنسیت</h5>
+            <div class="line-shope"></div>
+            <% genders.forEach(gend =>{ %>
+              <div class="boxes mt-2">
+                <input type="checkbox" value="<%= gend.slug %>"  name="gender" <%= gend.slug === gender ? 'checked' : '' %> id="box-5">
+                <label for="box-5"><%= gend.name %></label>
+              </div>
+            <% }) %>    
+          </div>
+          <div class="sidebar_box mt-3">
+            <a href="#" class="btn btn-shop mt-2 btn-bubble filter">اعمال فیلتر</a>
+          </div>
+        </form>
+        </div>
+        <!--end_Sidebar-->
+        <div class="col-12 col-md-9 col-lg-9">
+          <div class="product_item">
+            <div class="product_item_heading">
+              <div class="row">
+                <% let{search} = req.query; %>
+                <% if(search) { %> 
+                  <div class="col-8 col-md-8">
+                    <h1>عبارت جستجو شده : <%= search %></h1>
+                  </div>
+                  <div class="col-4 col-md-4 text-left">
+                    <p>تعداد محصول: <span><%= healthCount %></span></p>
+                  </div>
+                  <% }else{ %> 
+                <div class="col-8 col-md-8">
+                  <h1>محصولات بهداشت شخصی</h1>
+                </div>
+                <div class="col-4 col-md-4 text-left">
+                  <p>تعداد محصول: <span><%= healthCount %></span></p>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            <div class="product-container mb-4">
+              <!--product-box-1-->
+              <% if(healths.docs.length) { %> 
+              <% healths.docs.forEach(health=> { %>
+              <div class="product-box hover hover-4">
+                <!--img-------->
+                <div class="product-img">
+                   <!--add-cart------->
+                   <span class="heart-shop">
+                    <a href="#"><i class="far fa-heart"></i></a>
+                  </span>
+                  <a href="<%= health.path() %>">
+                  <img src="/uploads/<%= health.file %>" alt="<%= health.title %>">
+                </a>
+                </div>
+                <!--details-->
+                <div class="product-details">
+                  <a href="<%= health.path() %>" class="p-name"><h2><%= health.title %></h2></a>
+                  <% if(health.notprice){ %>
+                    <span class="p-notprice"><%= health.notprice %></span>
+                  <% } %>
+                  <span class="p-price"><%= health.price %> تومان</span>
+                  <% if(health.typetwo == 'available') { %>
+                    <div class="btn_cart">
+                        <a href="/cart/addItem_health<%= health.path() %>" class="buttton p-shop_cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div> 
+                  <% }else{ %>
+                      <span class="available-text"> محصول موجود بود به من خبر بده</span><br>
+                      <form id="available" action="/available/<%= health._id %>" method="POST">
+                        <div class="ui labeled button" tabindex="0">
+                        <button class="buttton p-shop_cart" type="submit">
+                        <i class="far fa-bell"></i>
+                            <%= health.available %>                         
+                        </button>
+                    </div>
+                        
+                    </form> 
+                    <% } %>
+                </div>
+              </div>
+              <% }) %>
+              <% }else{ %>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center mr-5">
+                      <div class="never alert alert-danger mt-5 mx-auto">
+                          <p class="mt-1">محصولی یافت نشد.</p> 
+                      </div>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+
+            <%- include(viewPath('layouts/pagination') ,{ pagination : healths}) %>
+            
+          </div>
+        </div>
+      </div><!--row-->
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<section class="register_login_box"> 
+    <div class="l-form">
+      <div class="shope1"></div>
+      <div class="shope2"></div>
+      <div class="form">
+        
+        <form method="POST" action="/auth/register/validate" class="form__content">
+          <%- include(viewPath('layouts/error-messages')) -%>
+          <h1 class="form__title">عضویت کاربر</h1>
+          <p>لطفا کد فعال سازی را در فیلد زیر وارد کنید</p>
+          <div class="form__div form__div-one">
+            <div class="form__icon">
+              <i class="bx bx-phone"></i>
+            </div>
+            <div class="form__div-input">
+              
+              <input type="text" id="mobile" name="mobile" value="<%= old('mobile', mobile) %>" class="form__input">
+            </div>
+          </div><!--form__div-->
+          <div class="form__div">
+            <div class="form__icon">
+                <i class='bx bx-task'></i>
+            </div>
+            <div class="form__div-input">
+                <label for="code" class="form__label">کد تایید</label>
+                <input type="text" id="code" name="code" value="<%= old('code') %>" class="form__input">
+            </div> 
+          </div><!--form__div-->
+          <div class="form-group">
+            <%- recaptcha %>
+          </div>
+          <input type="submit" class="form__button" value="تایید">
+          
+        </form>
+        <img src="/images/icon/Authentication_Two.png" class="form__img" alt="">
+      </div>
+    </div><!--l-form-->
+</section>

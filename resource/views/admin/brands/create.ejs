@@ -1,0 +1,27 @@
+    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+        <h2>ایجاد برند محصول</h2>
+    </div>
+    <form class="form-horizontal" action="/admin/brands/create" method="post" enctype="multipart/form-data">
+
+        <%- include(viewPath('layouts/error-messages')) -%>
+
+        <div class="form-group row">
+            <div class="col">
+                <label for="file" class="control-label font-weight-bold">تصویر برند</label>
+                <input type="file" class="form-control" name="images" value="<%= old('images') %>" id="images">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <label for="title" class="control-label font-weight-bold">نام برند</label>
+                <input type="text" class="form-control" name="title" value="<%= old('title') %>" id="title">
+            </div>
+        </div>
+        
+        <div class="form-group row">
+                <div class="col">
+                    <button type="submit" class="btn btn-danger">ارسال</button>
+                </div>
+            </div>
+    </form>
+       

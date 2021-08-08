@@ -1,0 +1,14 @@
+<section class="rules_box mt-3 mb-3">
+    <div class="container">
+        <% response.forEach(response =>{ %>
+        <div class="arrival-heading">
+            <h1><%= response.title %></h1>
+            <div class="line-shope"></div>
+          </div>
+          <div class="rules_body mt-5">
+              <p><%- response.body %>   
+            </p>
+          </div>
+          <% }) %>
+    </div>
+</section>

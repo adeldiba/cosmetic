@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-12 col-md-10">
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+            <h2>ایجاد گالری تصاویر</h2>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-2">
+        <div class="text-left">
+            <a href="/admin/gullerys_h" type="submit" class="btn btn-info">بازگشت</a>
+        </div>
+    </div>
+</div><!--row-->
+    
+    <form class="form-horizontal" action="/admin/gullerys_h/create" method="POST" enctype="multipart/form-data">
+
+        <%- include(viewPath('layouts/error-messages')) -%>      
+        <div class="form-group">
+            <label for="">Image</label>
+            <input type="file" class="form-control" name="image" id="img"><br>
+            <img class="z-depth-2" src="#" id="imgPreview" alt="">
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <label for="health" class="control-label font-weight-bold font-weight-bold">محصول مربوطه</label>
+                <select name="health" id="health" class="form-control">
+                    <% healths.forEach(health => { %> 
+                        <option value="<%= health._id %>" <%= String(old('health')) == String(health._id) ? 'selected' : '' %> ><%= health.title %></option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-danger">ارسال</button>
+            </div>
+        </div>
+    </form>
+    <link rel="stylesheet" href="/css/component-chosen.min.css">
+<script src="/ckeditor/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+<script>
+    function readURL(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function(e){
+               $('#imgPreview').attr('src', e.target.result).width(100).height(100); 
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#img").change(function(){
+        readURL(this);
+    });
+</script>
+
+<script>
+
+    $('.form-control-chosen').chosen({});    
+</script>
+<script>
+    CKEDITOR.replace('body' , {
+         filebrowserUploadUrl : '/admin/upload-image'
+     });
+     CKEDITOR.replace('body2' , {
+         filebrowserUploadUrl : '/admin/upload-image'
+     });
+    
+</script>

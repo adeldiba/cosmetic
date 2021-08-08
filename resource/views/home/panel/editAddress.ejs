@@ -1,0 +1,84 @@
+<section class="section_panel">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-3">
+              <%- include(viewPath('home/panel/sidebar')); %>
+            </div>
+            <div class="col-12 col-md-9 col-lg-9">
+              <div class="panel_main">
+                  <div class="panel_main_heading">
+                      <h2>اطلاعات شخصی</h2>
+                  </div>
+                  <div class="panel_main_form">
+                       
+                    <form  action="/user/panel/<%= panel._id %>?_method=put" method="POST">
+                        <%- include(viewPath('layouts/error-messages')) -%>
+                        <div class="form-group">
+                          <div class="row">
+                              <div class="col">
+                                  <label for="name_family">نام و نام خانوادگی</label>
+                                  <input type="text" name="name_family" id="name_family" value="<%= panel.name_family %>"  class="form-control" aria-describedby="emailHelp" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                              </div>
+                              <div class="col">
+                                  <label for="phone">شماره موبایل</label>
+                                  <input type="text" name="phone" id="phone" value="<%= panel.phone %>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا شماره موبایل خود را وارد کنید">
+                              </div>
+                          </div>
+                        </div>
+                            <div class="form-group">
+                              <div class="row">
+                              <div class="col">
+                                  <label for="codeM">کد ملی</label>
+                                  <input type="text" name="codeM" id="codeM" value="<%= panel.codeM %>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا کد ملی خود را بدرستی وارد کنید">
+                              </div>
+                              <div class="col">
+                                  <label for="postal_code">کد پستی</label>
+                                  <input type="text" name="postal_code" id="postal_code" value="<%= panel.postal_code %>" class="form-control" aria-describedby="emailHelp" placeholder="لطفا کد پستی خود را به درستی وارد کنید">
+                              </div>
+                          </div>
+                              </div>
+                            
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col">
+                                    <label for="exampleForm2">استان</label>
+                                    <span class="input-group-text m-s" id="basic-addon1">
+                                        <i class="fas fa-caret-down"></i>
+                                    </span>
+                                    <select name="state" id="state" value="<%= panel.state %>" class="province month-input form-control">       
+                                    </select>
+                                </div>
+                                <div class="col">
+                                  <label for="exampleForm2">شهر</label>
+                                  <span class="input-group-text m-s" id="basic-addon1">
+                                      <i class="fas fa-caret-down"></i>
+                                  </span>
+                                      <select name="city" id="city" value="" class="city month-input form-control">
+                                        <option value="selectvalues"<%= panel.city === 'آذربایجان‌شرقی' ? 'selected' : '' %>></option>
+                                        <option value="'چهارمحال‌و‌بختیاری'"<%= panel.city === 'چهارمحال‌و‌بختیاری' ? 'selected' : '' %>></option>
+                                        <option value="selectvalues"<%= panel.city === 'خراسان‌جنوبی' ? 'selected' : '' %>></option>
+                                        <option value="selectvalues"<%= panel.city === 'خراسان‌رضوی' ? 'selected' : '' %>></option>
+                                      </select>
+                                  
+                              </div>
+                                    </div><!--row-->
+                        </div>
+
+                        <div class="form-group">
+                          <label for="address">آدرس</label>
+                          <input type="text" name="address" id="address" value="<%= panel.address %>" class="form-control" placeholder="لطفا آدرس خود را کامل و درست وارد کنید">
+                        </div>
+                        <div class="form-group mt-4">
+                            <%- recaptcha %>
+                            </div>
+                        <div class="panel_btn mt-5 text-left">
+                          <button type="submit" class="btn">ثبت اطلاعات شخصی</button>
+                        </div>
+                    </form>
+                   
+                </div>
+            </div>
+          </div>
+      </div><!--row-->
+  </div>
+</section>
